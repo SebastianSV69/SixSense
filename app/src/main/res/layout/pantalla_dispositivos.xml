@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F7F6"
+    android:padding="20dp">
+
+    <!-- ENCABEZADO -->
+    <LinearLayout
+        android:id="@+id/layoutHeaderDev"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_marginTop="12dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="MI SISTEMA"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:textColor="#8A9A8B"
+                android:letterSpacing="0.1"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Dispositivos"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:textColor="#133B2B"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4 dispositivos vinculados"
+                android:textSize="11sp"
+                android:textColor="#707070"/>
+        </LinearLayout>
+
+        <!-- Botón de añadir (+) -->
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="+"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:backgroundTint="#133B2B"
+            app:cornerRadius="12dp"/>
+    </LinearLayout>
+
+    <!-- TARJETA RED DEL SISTEMA -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardNetwork"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="2dp"
+        app:cardBackgroundColor="#133B2B"
+        app:layout_constraintTop_toBottomOf="@id/layoutHeaderDev"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="16dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Red del sistema"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Todos los dispositivos responden correctamente"
+                    android:textSize="11sp"
+                    android:textColor="#D3DDD8"
+                    android:layout_marginTop="2dp"/>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="4/4"
+                android:textStyle="bold"
+                android:textSize="12sp"
+                android:textColor="#133B2B"
+                android:background="#D3DDD8"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- TÍTULO SECCIÓN -->
+    <LinearLayout
+        android:id="@+id/layoutSectionTitleDev"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="16dp"
+        app:layout_constraintTop_toBottomOf="@id/cardNetwork"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dispositivos vinculados"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:textColor="#133B2B"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Equipos registrados en tu sistema"
+            android:textSize="11sp"
+            android:textColor="#707070"/>
+    </LinearLayout>
+
+    <!-- LISTA DE DISPOSITIVOS Y BOTÓN DE VINCULACIÓN -->
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintTop_toBottomOf="@id/layoutSectionTitleDev"
+        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- 1. Arduino Uno -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="1dp"
+                app:cardBackgroundColor="#FFFFFF">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="14dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Arduino Uno" android:textStyle="bold" android:textColor="#133B2B" android:textSize="15sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Controlador central · Sala principal" android:textSize="11sp" android:textColor="#707070"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🟢 Conectado por USB" android:textSize="11sp" android:textColor="#2E7D32" android:layout_marginTop="2dp"/>
+                    </LinearLayout>
+
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=">" android:textSize="18sp" android:textColor="#707070"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- 2. Sensor puerta -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="1dp"
+                app:cardBackgroundColor="#FFFFFF">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="14dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sensor puerta" android:textStyle="bold" android:textColor="#133B2B" android:textSize="15sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sensor magnético · Entrada principal" android:textSize="11sp" android:textColor="#707070"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🟢 Conectado por Cableado" android:textSize="11sp" android:textColor="#2E7D32" android:layout_marginTop="2dp"/>
+                    </LinearLayout>
+
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=">" android:textSize="18sp" android:textColor="#707070"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- 3. Sensor ventana -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="1dp"
+                app:cardBackgroundColor="#FFFFFF">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="14dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sensor ventana" android:textStyle="bold" android:textColor="#133B2B" android:textSize="15sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sensor de vibración · Habitación" android:textSize="11sp" android:textColor="#707070"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🟢 Conectado por Cableado" android:textSize="11sp" android:textColor="#2E7D32" android:layout_marginTop="2dp"/>
+                    </LinearLayout>
+
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=">" android:textSize="18sp" android:textColor="#707070"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- 4. Alarma principal -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                app:cardCornerRadius="14dp"
+                app:cardElevation="1dp"
+                app:cardBackgroundColor="#FFFFFF">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="14dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alarma principal" android:textStyle="bold" android:textColor="#133B2B" android:textSize="15sp"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alarma sonora · Pasillo" android:textSize="11sp" android:textColor="#707070"/>
+                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🟢 Conectado por Cableado" android:textSize="11sp" android:textColor="#2E7D32" android:layout_marginTop="2dp"/>
+                    </LinearLayout>
+
+                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=">" android:textSize="18sp" android:textColor="#707070"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Botón Vincular nuevo dispositivo -->
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:text="+ Vincular nuevo dispositivo"
+                android:textColor="#133B2B"
+                android:backgroundTint="#E2ECE9"
+                android:textStyle="bold"
+                app:cornerRadius="14dp"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- BARRA DE NAVEGACIÓN INFERIOR -->
+    <LinearLayout
+        android:id="@+id/bottomNav"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:background="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView android:id="@+id/navInicio" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="Inicio" android:gravity="center" android:textSize="10sp" android:textColor="#707070"/>
+        <TextView android:id="@+id/navDispositivos" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="Dispositivos" android:gravity="center" android:textSize="10sp" android:textColor="#133B2B" android:textStyle="bold"/>
+        <TextView android:id="@+id/navFunciones" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="Funciones" android:gravity="center" android:textSize="10sp" android:textColor="#707070"/>
+        <TextView android:id="@+id/navAjustes" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="Ajustes" android:gravity="center" android:textSize="10sp" android:textColor="#707070"/>
+        <TextView android:id="@+id/navBloquear" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="Bloquear" android:gravity="center" android:textSize="10sp" android:textColor="#707070"/>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
