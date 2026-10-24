@@ -4,43 +4,61 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F7F6"
-    android:padding="20dp">
+    android:background="@color/brand_background"
+    android:paddingHorizontal="20dp"
+    android:paddingTop="12dp">
 
     <!-- ENCABEZADO -->
     <LinearLayout
         android:id="@+id/layoutHeaderFunc"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="12dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="MI SISTEMA"
-            android:textSize="10sp"
-            android:textStyle="bold"
-            android:textColor="#8A9A8B"
-            android:letterSpacing="0.1"/>
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Funciones"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            android:textColor="#133B2B"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AUTOMATIZACIÓN"
+                android:textSize="10sp"
+                android:textStyle="bold"
+                android:textColor="@color/green_muted"
+                android:letterSpacing="0.1"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Automatizaciones y Modos de Seguridad"
-            android:textSize="11sp"
-            android:textColor="#707070"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Funciones"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                android:textColor="@color/green_dark"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Control y análisis avanzado"
+                android:textSize="11sp"
+                android:textColor="@color/text_secondary"/>
+        </LinearLayout>
+
+        <!-- Botón superior derecho de analíticas -->
+        <ImageView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_rounded_icon_container"
+            android:src="@drawable/ic_chart"
+            app:tint="@color/green_dark"
+            android:padding="12dp"
+            android:contentDescription="Gráfico"/>
     </LinearLayout>
 
     <!-- LISTA DE FUNCIONES -->
@@ -48,7 +66,8 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="8dp"
+        android:scrollbars="none"
         app:layout_constraintTop_toBottomOf="@id/layoutHeaderFunc"
         app:layout_constraintBottom_toTopOf="@id/bottomNav"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,208 +78,471 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Modo Noche -->
+            <!-- TARJETA 1: PROGRAMACIÓN DE HORARIOS -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="1dp"
-                app:cardBackgroundColor="#FFFFFF">
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/card_background">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="16dp">
+                    android:orientation="vertical"
+                    android:padding="18dp">
 
+                    <!-- CABECERA: Título y Switch -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_toStartOf="@+id/switchHorarios"
+                            android:layout_alignParentStart="true">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Programación de horarios"
+                                android:textStyle="bold"
+                                android:textColor="@color/green_dark"
+                                android:textSize="16sp"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Automatiza el armado y desarmado"
+                                android:textColor="@color/green_muted"
+                                android:textSize="12sp"/>
+                        </LinearLayout>
+
+                        <androidx.appcompat.widget.SwitchCompat
+                            android:id="@+id/switchHorarios"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            android:checked="true"
+                            app:thumbTint="@color/card_background"
+                            app:trackTint="@color/green_dark"/>
+                    </RelativeLayout>
+
+                    <!-- SECCIÓN SELECCIÓN DE HORA (Estructura fija simplificada) -->
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="horizontal"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center_vertical">
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <!-- Bloque Izquierdo: Armar -->
+                        <LinearLayout
+                            android:id="@+id/btnConfigurarArmar"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="🌙 Modo Noche"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:textColor="#133B2B"/>
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:background="@color/brand_background"
+                            android:padding="10dp"
+                            android:clickable="true"
+                            android:focusable="true">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="ARMAR A LAS"
+                                android:textSize="10sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/green_muted"/>
+                            <TextView
+                                android:id="@+id/tvHoraArmar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="22:00"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/green_dark"
+                                android:layout_marginTop="2dp"/>
+                        </LinearLayout>
 
-                        <TextView
-                            android:layout_width="wrap_content"
+                        <!-- Separador intermedio -->
+                        <View
+                            android:layout_width="12dp"
+                            android:layout_height="1dp"
+                            android:background="@color/green_muted"
+                            android:layout_marginHorizontal="8dp"/>
+
+                        <!-- Bloque Derecho: Desarmar -->
+                        <LinearLayout
+                            android:id="@+id/btnConfigurarDesarmar"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:text="Activa sensores perimetrales y silencia tonos"
-                            android:textSize="11sp"
-                            android:textColor="#707070"
-                            android:layout_marginTop="2dp"/>
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:background="@color/brand_background"
+                            android:padding="10dp"
+                            android:clickable="true"
+                            android:focusable="true">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="DESARMAR A LAS"
+                                android:textSize="10sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/green_muted"/>
+                            <TextView
+                                android:id="@+id/tvHoraDesarmar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="07:00"
+                                android:textSize="20sp"
+                                android:textStyle="bold"
+                                android:textColor="@color/green_dark"
+                                android:layout_marginTop="2dp"/>
+                        </LinearLayout>
                     </LinearLayout>
 
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="48dp"
-                        android:text="Activar"
-                        android:textSize="12sp"
-                        android:textColor="#133B2B"
-                        android:backgroundTint="#E2ECE9"
-                        app:cornerRadius="10dp"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <!-- Modo Fuera de Casa -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="1dp"
-                app:cardBackgroundColor="#FFFFFF">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="16dp">
-
+                    <!-- SECCIÓN SELECCIÓN DE DÍAS (Sin anidaciones complejas) -->
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:orientation="horizontal"
+                        android:layout_marginTop="16dp"
+                        android:gravity="center">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="🏠 Fuera de Casa"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:textColor="#133B2B"/>
+                        <!-- Días Activos -->
+                        <TextView android:id="@+id/dayL" android:layout_width="32dp" android:layout_height="32dp" android:text="L" android:gravity="center" android:textColor="@color/card_background" android:background="@color/green_dark" android:textStyle="bold" android:layout_marginHorizontal="4dp"/>
+                        <TextView android:id="@+id/dayM" android:layout_width="32dp" android:layout_height="32dp" android:text="M" android:gravity="center" android:textColor="@color/card_background" android:background="@color/green_dark" android:textStyle="bold" android:layout_marginHorizontal="4dp"/>
+                        <TextView android:id="@+id/dayX" android:layout_width="32dp" android:layout_height="32dp" android:text="X" android:gravity="center" android:textColor="@color/card_background" android:background="@color/green_dark" android:textStyle="bold" android:layout_marginHorizontal="4dp"/>
+                        <TextView android:id="@+id/dayJ" android:layout_width="32dp" android:layout_height="32dp" android:text="J" android:gravity="center" android:textColor="@color/card_background" android:background="@color/green_dark" android:textStyle="bold" android:layout_marginHorizontal="4dp"/>
+                        <TextView android:id="@+id/dayV" android:layout_width="32dp" android:layout_height="32dp" android:text="V" android:gravity="center" android:textColor="@color/card_background" android:background="@color/green_dark" android:textStyle="bold" android:layout_marginHorizontal="4dp"/>
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Protección total con sensores de movimiento y puerta"
-                            android:textSize="11sp"
-                            android:textColor="#707070"
-                            android:layout_marginTop="2dp"/>
+                        <!-- Días Inactivos -->
+                        <TextView android:id="@+id/dayS" android:layout_width="32dp" android:layout_height="32dp" android:text="S" android:gravity="center" android:textColor="@color/text_secondary" android:background="@color/day_inactive_bg" android:layout_marginHorizontal="4dp"/>
+                        <TextView android:id="@+id/dayD" android:layout_width="32dp" android:layout_height="32dp" android:text="D" android:gravity="center" android:textColor="@color/text_secondary" android:background="@color/day_inactive_bg" android:layout_marginHorizontal="4dp"/>
                     </LinearLayout>
 
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="48dp"
-                        android:text="Activar"
-                        android:textSize="12sp"
-                        android:textColor="#FFFFFF"
-                        android:backgroundTint="#133B2B"
-                        app:cornerRadius="10dp"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <!-- Alarma de Pánico -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="1dp"
-                app:cardBackgroundColor="#FFF0F0">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="16dp">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="🚨 Botón de Pánico"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:textColor="#C62828"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Acciona la sirena inmediatamente"
-                            android:textSize="11sp"
-                            android:textColor="#707070"
-                            android:layout_marginTop="2dp"/>
-                    </LinearLayout>
-
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="48dp"
-                        android:text="¡DISPARAR!"
-                        android:textSize="11sp"
-                        android:textStyle="bold"
-                        android:textColor="#FFFFFF"
-                        android:backgroundTint="#C62828"
-                        app:cornerRadius="10dp"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <!-- Alertas Silenciosas -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="1dp"
-                app:cardBackgroundColor="#FFFFFF">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="16dp">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="🔕 Alertas Silenciosas"
-                            android:textSize="16sp"
-                            android:textStyle="bold"
-                            android:textColor="#133B2B"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Notificación al teléfono sin sonar en casa"
-                            android:textSize="11sp"
-                            android:textColor="#707070"
-                            android:layout_marginTop="2dp"/>
-                    </LinearLayout>
-
+                    <!-- Mensaje inferior -->
                     <TextView
+                        android:id="@+id/tvEstadoHorarios"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Activo"
-                        android:textSize="12sp"
-                        android:textStyle="bold"
-                        android:textColor="#2E7D32"
-                        android:background="#E8F5E9"
-                        android:paddingHorizontal="10dp"
-                        android:paddingVertical="4dp"/>
+                        android:layout_marginTop="14dp"
+                        android:text="●  5 días activos. Próximo armado hoy a las 22:00"
+                        android:textColor="@color/green_muted"
+                        android:textSize="11sp"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
+
+
+            <!-- ANÁLISIS DEL SISTEMA -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/card_background">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <!-- CABECERA: Títulos e Información de Métricas -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <!-- Icono Estadísticas -->
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/containerIconAnalysis"
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="@color/brand_background">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@android:drawable/ic_menu_sort_by_size"
+                                app:tint="@color/green_dark"
+                                android:padding="6dp"
+                                android:contentDescription="Icono Análisis"/>
+                        </androidx.cardview.widget.CardView>
+
+                        <!-- Títulos principales -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toEndOf="@id/containerIconAnalysis"
+                            android:layout_toStartOf="@+id/layoutMetrics"
+                            android:layout_marginStart="12dp"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Análisis del sistema"
+                                android:textStyle="bold"
+                                android:textColor="@color/green_dark"
+                                android:textSize="15sp"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Actividad de las últimas 24 horas"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="11sp"/>
+                        </LinearLayout>
+
+                        <!-- Valores numéricos derechos -->
+                        <LinearLayout
+                            android:id="@+id/layoutMetrics"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:gravity="end"
+                            android:orientation="vertical">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0.02 g"
+                                android:textStyle="bold"
+                                android:textColor="@color/green_dark"
+                                android:textSize="15sp"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Promedio actual"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="9sp"/>
+                        </LinearLayout>
+                    </RelativeLayout>
+
+                    <!-- SELECTOR DE PESTAÑAS (Vibración, Eventos, Señal) -->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="42dp"
+                        android:layout_marginTop="20dp"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="@color/brand_background">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="4dp"
+                            android:orientation="horizontal">
+
+                            <!-- Opción Seleccionada: Vibración -->
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                app:cardCornerRadius="8dp"
+                                app:cardElevation="0dp"
+                                app:cardBackgroundColor="@color/card_background">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="Vibración"
+                                    android:gravity="center"
+                                    android:textColor="@color/green_dark"
+                                    android:textStyle="bold"
+                                    android:textSize="12sp"/>
+                            </androidx.cardview.widget.CardView>
+
+                            <!-- Opción: Eventos -->
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="Eventos"
+                                android:gravity="center"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="12sp"/>
+
+                            <!-- Opción: Señal -->
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:text="Señal"
+                                android:gravity="center"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="12sp"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- GRÁFICA DE BARRAS SIMULADA -->
+                    <!-- Se define una altura fija de 100dp para las barras inferiores -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="24dp"
+                        android:gravity="bottom"
+                        android:orientation="horizontal">
+
+                        <!-- Los pesos (layout_weight) se distribuyen equitativamente en 1 para cada barra -->
+                        <!-- La propiedad layout_height="XXdp" controla visualmente la altura de cada barra de la gráfica -->
+                        <View android:layout_width="0dp" android:layout_height="20dp" android:layout_weight="1" android:layout_marginHorizontal="3dp" android:background="@color/green_muted"/>
+                        <View android:layout_width="0dp" android:layout_height="35dp" android:layout_weight="1" android:layout_marginHorizontal="3dp" android:background="@color/green_muted"/>
+                        <View android:layout_width="0dp" android:layout_height="15dp" android:layout_weight="1" android:layout_marginHorizontal="3dp" android:background="@color/green_dark"/>
+                        <View android:layout_width="0dp" android:layout_height="45dp" android:layout_weight="1" android:layout_marginHorizontal="3dp" android:background="@color/green_muted"/>
+                        <View android:layout_width="0dp" android:layout_height="55dp" android:layout_weight="1" android:layout_marginHorizontal="3dp" android:background="@color/green_muted"/>
+                        <View android:layout_width="0dp" android:layout_height="70dp" android:layout_weight="1" android:layout_marginHorizontal="3dp" android:background="@color/green_dark"/>
+                        <View android:layout_width="0dp" android:layout_height="40dp" android:layout_weight="1" android:layout_marginHorizontal="3dp" android:background="@color/green_muted"/>
+                        <View android:layout_width="0dp" android:layout_height="65dp" android:layout_weight="1" android:layout_marginHorizontal="3dp" android:background="@color/green_muted"/>
+                        <View android:layout_width="0dp" android:layout_height="80dp" android:layout_weight="1" android:layout_marginHorizontal="3dp" android:background="@color/green_muted"/>
+                        <View android:layout_width="0dp" android:layout_height="90dp" android:layout_weight="1" android:layout_marginHorizontal="3dp" android:background="@color/green_dark"/>
+                    </LinearLayout>
+
+                    <!-- EJE X / TIEMPOS -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentStart="true"
+                            android:text="00:00"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="9sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:text="12:00"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="9sp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:text="Ahora"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="9sp"/>
+                    </RelativeLayout>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+            <!-- ALARMA MANUAL -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/card_background">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <!-- CABECERA: Icono, Título y Descripción -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <!-- Icono pequeño con fondo claro usando otra CardView interna para evitar drawables -->
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="@color/alarm_light_bg">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@android:drawable/ic_dialog_alert"
+                                app:tint="@color/alarm_primary"
+                                android:padding="6dp"
+                                android:contentDescription="Icono Alerta"/>
+                        </androidx.cardview.widget.CardView>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Alarma manual"
+                                android:textStyle="bold"
+                                android:textColor="@color/alarm_primary"
+                                android:textSize="15sp"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Activa la alarma ante una emergencia"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="11sp"/>
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- CAJA DE ADVERTENCIA INTERMEDIA (Hecha con CardView para redondear bordes sin drawable) -->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:cardCornerRadius="14dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="@color/alarm_light_bg">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="12dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:src="@android:drawable/ic_dialog_info"
+                                app:tint="@color/alarm_primary"
+                                android:contentDescription="Icono Información"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:text="La activación manual hará sonar la alarma inmediatamente y enviará una notificación a todos los usuarios."
+                                android:textColor="@color/alarm_primary"
+                                android:textSize="10sp"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- BOTÓN DE ACTIVACIÓN PRINCIPAL -->
+                    <Button
+                        android:id="@+id/btnActivarAlarma"
+                        android:layout_width="match_parent"
+                        android:layout_height="54dp"
+                        android:layout_marginTop="16dp"
+                        android:text="Activar alarma manual"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/card_background"
+                        android:backgroundTint="@color/alarm_primary"
+                        app:cornerRadius="16dp"
+                        android:icon="@android:drawable/ic_lock_lock"
+                        app:iconGravity="textStart"
+                        app:iconTint="@color/card_background"/>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
 
         </LinearLayout>
     </ScrollView>

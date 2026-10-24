@@ -1,5 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Colores base de la aplicación -->
+    <color name="brand_background">#F5F7F6</color> <!-- Fondo gris claro de la pantalla -->
+    <color name="card_background">#FFFFFF</color>  <!-- Fondo blanco de las tarjetas -->
+
+    <!-- Gama de Verdes (Automatización y Análisis) -->
+    <color name="green_dark">#133B2B</color>       <!-- Verde principal (Títulos, switch activo, días activos) -->
+    <color name="green_medium">#2E5948</color>     <!-- Verde medio para variantes o estados de gráficos -->
+    <color name="green_muted">#8A9A8B</color>      <!-- Verde apagado/grisáceo (Subtítulos, etiquetas pequeñas) -->
+    <color name="green_light_bg">#E2ECE9</color>   <!-- Fondo verde muy claro (Botón de analíticas superior) -->
+
+    <!-- Gama de Rojos (Alarma Manual y Pánico) -->
+    <color name="alarm_primary">#A24A42</color>    <!-- Rojo institucional (Botón principal, título de alarma) -->
+    <color name="alarm_light_bg">#FFF0F0</color>   <!-- Fondo rosa/rojo claro (Caja de advertencia e icono) -->
+
+    <!-- Colores Neutros de Soporte -->
+    <color name="text_primary">#133B2B</color>     <!-- Verde principal para títulos y subtítulos -->
+    <color name="text_secondary">#707070</color>   <!-- Gris para descripciones y textos secundarios -->
+    <color name="day_inactive_bg">#F5F7F6</color>  <!-- Fondo gris para los días no seleccionados (S, D) -->
 </resources>

@@ -21,10 +21,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="MI SISTEMA"
+            android:text="CENTRO DE ACTIVIDADES"
             android:textSize="10sp"
             android:textStyle="bold"
-            android:textColor="#8A9A8B"
+            android:textColor="@color/text_secondary"
             android:letterSpacing="0.1"/>
 
         <TextView
@@ -33,14 +33,14 @@
             android:text="Notificaciones"
             android:textSize="26sp"
             android:textStyle="bold"
-            android:textColor="#133B2B"/>
+            android:textColor="@color/text_primary"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Historial de eventos y alertas"
             android:textSize="11sp"
-            android:textColor="#707070"/>
+            android:textColor="@color/text_secondary"/>
     </LinearLayout>
 
     <!-- LISTA DE NOTIFICACIONES -->
@@ -59,147 +59,288 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- Notificación 1 -->
+            <!-- TARJETA: ALERTA IMPORTANTE -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                app:cardCornerRadius="14dp"
-                app:cardElevation="1dp"
-                app:cardBackgroundColor="#FFFFFF">
+                android:layout_marginBottom="24dp"
+                app:cardCornerRadius="28dp"
+                app:cardElevation="0dp"
+                app:cardBackgroundColor="@color/alarm_primary">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="14dp">
+                    android:orientation="vertical"
+                    android:padding="20dp">
 
-                    <LinearLayout
-                        android:layout_width="0dp"
+                    <!-- FILA SUPERIOR: Icono, Título y Etiqueta "AHORA" -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <!-- Icono de Advertencia -->
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardIconAlert"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            app:cardCornerRadius="10dp"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="#20FFFFFF"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true">
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:src="@android:drawable/ic_dialog_alert"
+                                app:tint="@color/card_background"
+                                android:padding="8dp"
+                                android:contentDescription="Alerta"/>
+                        </androidx.cardview.widget.CardView>
+
+                        <!-- Títulos de la cabecera -->
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_toEndOf="@id/cardIconAlert"
+                            android:layout_toStartOf="@+id/cardBadgeAhora"
+                            android:layout_marginStart="12dp"
+                            android:layout_centerVertical="true">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Alerta importante"
+                                android:textStyle="bold"
+                                android:textColor="@color/card_background"
+                                android:textSize="14sp"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Sensor magnético - Entrada principal"
+                                android:textColor="#D0FFFFFF"
+                                android:textSize="10sp"
+                                android:layout_marginTop="1dp"/>
+                        </LinearLayout>
+
+                        <!-- Etiqueta AHORA -->
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cardBadgeAhora"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="0dp"
+                            app:cardBackgroundColor="#30FFFFFF">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="AHORA"
+                                android:textStyle="bold"
+                                android:textColor="@color/card_background"
+                                android:textSize="9sp"
+                                android:paddingHorizontal="10dp"
+                                android:paddingVertical="5dp"/>
+                        </androidx.cardview.widget.CardView>
+                    </RelativeLayout>
+
+                    <!-- TEXTO CENTRAL PRINCIPAL -->
+                    <TextView
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="🟢 Sistema Desarmado"
-                            android:textSize="15sp"
-                            android:textStyle="bold"
-                            android:textColor="#133B2B"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="El sistema fue desarmado con éxito desde la aplicación."
-                            android:textSize="11sp"
-                            android:textColor="#707070"
-                            android:layout_marginTop="2dp"/>
-                    </LinearLayout>
+                        android:layout_marginTop="20dp"
+                        android:text="Se detectó una apertura"
+                        android:textStyle="bold"
+                        android:textColor="@color/card_background"
+                        android:textSize="24sp"/>
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Hace 5 min"
-                        android:textSize="10sp"
-                        android:textColor="#8A9A8B"/>
+                        android:layout_marginTop="6dp"
+                        android:text="La alarma sonora se activará automáticamente. Si eres tú, desarma el sistema antes de que termine el tiempo."
+                        android:textColor="#E0FFFFFF"
+                        android:textSize="11sp"
+                        android:lineSpacingMultiplier="1.2"/>
+
+                    <!-- SECCIÓN CENTRAL: Temporizador de cuenta regresiva -->
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginBottom="20dp"
+                        app:cardCornerRadius="16dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="#15000000">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:gravity="center_vertical"
+                            android:padding="12dp">
+
+                            <!-- Círculo del contador (Simulado con CardView perfectamente simétrica) -->
+                            <androidx.cardview.widget.CardView
+                                android:layout_width="44dp"
+                                android:layout_height="44dp"
+                                app:cardCornerRadius="22dp"
+                                app:cardElevation="0dp"
+                                app:cardBackgroundColor="#25FFFFFF">
+                                <TextView
+                                    android:id="@+id/tvCountdown"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:text="0"
+                                    android:gravity="center"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/card_background"
+                                    android:textSize="16sp"/>
+                            </androidx.cardview.widget.CardView>
+
+                            <!-- Textos del estado del contador -->
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:layout_marginStart="14dp">
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="alarma sonora activada"
+                                    android:textStyle="bold"
+                                    android:textColor="@color/card_background"
+                                    android:textSize="12sp"/>
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Se notificó la apertura detectada"
+                                    android:textColor="#B0FFFFFF"
+                                    android:textSize="10sp"
+                                    android:layout_marginTop="1dp"/>
+                            </LinearLayout>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- BOTÓN INFERIOR: Desarmar sistema -->
+                    <Button
+                        android:id="@+id/btnDesarmarAlerta"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:text="Desarmar sistema"
+                        android:textSize="13sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/alarm_primary"
+                        android:backgroundTint="@color/card_background"
+                        app:cornerRadius="16dp"
+                        android:icon="@android:drawable/ic_lock_power_off"
+                        app:iconTint="@color/alarm_primary"
+                        app:iconGravity="textStart"/>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Notificación 2 -->
-            <androidx.cardview.widget.CardView
+            <!-- SECCIÓN: HISTORIAL VACÍO -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                app:cardCornerRadius="14dp"
-                app:cardElevation="1dp"
-                app:cardBackgroundColor="#FFFFFF">
+                android:orientation="vertical">
 
-                <LinearLayout
+                <!-- CABECERA DEL HISTORIAL (Título y Estado) -->
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="14dp">
+                    android:layout_marginBottom="12dp">
 
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
+                        android:orientation="vertical"
+                        android:layout_alignParentStart="true"
+                        android:layout_toStartOf="@+id/cardEstadoSistemaVacit">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="🟡 Sensor Magnético"
-                            android:textSize="15sp"
+                            android:text="Historial"
                             android:textStyle="bold"
-                            android:textColor="#133B2B"/>
-
+                            android:textColor="@color/green_dark"
+                            android:textSize="18sp"/>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Apertura detectada en Puerta de entrada."
+                            android:text="Alertas y reportes recientes"
+                            android:textColor="@color/text_secondary"
                             android:textSize="11sp"
-                            android:textColor="#707070"
                             android:layout_marginTop="2dp"/>
                     </LinearLayout>
 
-                    <TextView
+                    <!-- Etiqueta de Estado Fijo -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardEstadoSistemaVacit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Hace 25 min"
-                        android:textSize="10sp"
-                        android:textColor="#8A9A8B"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="@color/brand_background">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sin eventos"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="9sp"
+                            android:paddingHorizontal="10dp"
+                            android:paddingVertical="5dp"/>
+                    </androidx.cardview.widget.CardView>
+                </RelativeLayout>
 
-            <!-- Notificación 3 -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                app:cardCornerRadius="14dp"
-                app:cardElevation="1dp"
-                app:cardBackgroundColor="#FFFFFF">
-
-                <LinearLayout
+                <!-- TARJETA CONTENEDORA DE ESTADO VACÍO -->
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="14dp">
+                    android:layout_height="180dp"
+                    android:layout_marginBottom="16dp"
+                    app:cardCornerRadius="20dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@color/card_background">
 
                     <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="24dp">
+
+                        <!-- Icono nativo de lista limpia -->
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:src="@android:drawable/ic_menu_today"
+                            app:tint="@color/green_muted"
+                            android:contentDescription="Historial Vacío"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="🟢 Arduino Uno Conectado"
-                            android:textSize="15sp"
+                            android:layout_marginTop="12dp"
+                            android:text="No hay registros guardados"
                             android:textStyle="bold"
-                            android:textColor="#133B2B"/>
+                            android:textColor="@color/green_dark"
+                            android:textSize="14sp"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="El controlador central restableció la comunicación."
+                            android:layout_marginTop="4dp"
+                            android:text="Las alertas y notificaciones del sistema aparecerán detalladas en esta lista."
+                            android:textColor="@color/text_secondary"
                             android:textSize="11sp"
-                            android:textColor="#707070"
-                            android:layout_marginTop="2dp"/>
+                            android:gravity="center"
+                            android:lineSpacingMultiplier="1.1"/>
                     </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Hace 1 hora"
-                        android:textSize="10sp"
-                        android:textColor="#8A9A8B"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
