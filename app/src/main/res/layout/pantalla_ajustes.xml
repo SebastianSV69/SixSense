@@ -4,106 +4,114 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F7F6"
-    android:padding="20dp">
+    android:background="@color/brand_background"
+    android:fitsSystemWindows="true">
 
     <!-- ENCABEZADO -->
     <LinearLayout
         android:id="@+id/layoutHeaderAdj"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
+        android:layout_marginStart="20dp"
         android:layout_marginTop="12dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginEnd="20dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PREFERENCIAS"
-            android:textSize="10sp"
-            android:textStyle="bold"
+            android:letterSpacing="0.1"
+            android:text="@string/ajustes_overline"
             android:textColor="@color/text_secondary"
-            android:letterSpacing="0.1"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ajustes"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            android:textColor="@color/text_primary"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Configuración general y seguridad"
             android:textSize="11sp"
-            android:textColor="@color/text_secondary"/>
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ajustes_title"
+            android:textColor="@color/text_primary"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ajustes_subtitle"
+            android:textColor="@color/text_secondary"
+            android:textSize="12sp" />
     </LinearLayout>
 
     <!-- OPCIONES DE AJUSTES -->
     <ScrollView
+        android:id="@+id/scrollAjustes"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="10dp"
+        android:clipToPadding="false"
+        android:paddingStart="20dp"
+        android:paddingEnd="20dp"
+        android:paddingBottom="16dp"
         android:scrollbars="none"
-        app:layout_constraintTop_toBottomOf="@id/layoutHeaderAdj"
         app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/layoutHeaderAdj">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- CARD USUARIO -->
+            <!-- TARJETA USUARIO -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="0dp"
-                app:cardBackgroundColor="#133B2B">
+                app:cardBackgroundColor="@color/green_dark"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
                     android:gravity="center_vertical"
+                    android:orientation="horizontal"
                     android:padding="16dp">
 
                     <ImageView
                         android:layout_width="48dp"
                         android:layout_height="48dp"
+                        android:contentDescription="@string/cd_user"
                         android:src="@android:drawable/ic_menu_myplaces"
-                        app:tint="#FFFFFF"
-                        android:contentDescription="Icono Usuario"/>
+                        app:tint="@color/card_background" />
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
                         android:layout_weight="1"
-                        android:orientation="vertical"
-                        android:layout_marginStart="12dp">
+                        android:orientation="vertical">
 
                         <TextView
+                            android:id="@+id/tvNombreUsuario"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Usuario"
+                            android:text="@string/user_name"
+                            android:textColor="@color/card_background"
                             android:textSize="18sp"
-                            android:textStyle="bold"
-                            android:textColor="#FFFFFF"/>
+                            android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tvRolUsuario"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Administrador del sistema"
-                            android:textSize="11sp"
-                            android:textColor="#D3DDD8"/>
+                            android:text="@string/user_role"
+                            android:textColor="@color/green_light_bg"
+                            android:textSize="12sp" />
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -113,9 +121,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/card_background"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="0dp"
-                app:cardBackgroundColor="@color/card_background">
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -123,195 +131,220 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <!-- CABECERA -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
                         android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="16dp">
+                        android:orientation="horizontal">
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="32dp"
                             android:layout_height="32dp"
+                            app:cardBackgroundColor="@color/green_light_bg"
                             app:cardCornerRadius="8dp"
-                            app:cardElevation="0dp"
-                            app:cardBackgroundColor="@color/brand_background">
+                            app:cardElevation="0dp">
+
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:src="@android:drawable/ic_menu_manage"
-                                app:tint="@color/green_dark"
+                                android:importantForAccessibility="no"
                                 android:padding="6dp"
-                                android:contentDescription="Icono Apariencia"/>
+                                android:src="@android:drawable/ic_menu_manage"
+                                app:tint="@color/green_dark" />
                         </androidx.cardview.widget.CardView>
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="12dp"
+                            android:layout_weight="1"
                             android:orientation="vertical">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Apariencia"
-                                android:textStyle="bold"
+                                android:text="@string/apariencia_title"
                                 android:textColor="@color/green_dark"
-                                android:textSize="14sp"/>
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Selecciona cómo quieres ver la aplicación"
+                                android:text="@string/apariencia_subtitle"
                                 android:textColor="@color/text_secondary"
-                                android:textSize="11sp"/>
+                                android:textSize="12sp" />
                         </LinearLayout>
                     </LinearLayout>
 
-                    <!-- GRUPO OPCIONES DE TEMA -->
-                    <RadioGroup
-                        android:id="@+id/radioGroupApariencia"
+                    <!-- Las 3 opciones son filas independientes; la selección única se controla desde el código.
+                         (Un RadioGroup no funciona si los RadioButton están dentro de otros layouts.) -->
+                    <LinearLayout
+                        android:id="@+id/groupApariencia"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <!-- Opción 1: Claro -->
-                        <androidx.cardview.widget.CardView
+                        <!-- Claro (seleccionado por defecto) -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardTemaClaro"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="8dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            app:cardBackgroundColor="@color/green_light_bg"
                             app:cardCornerRadius="12dp"
                             app:cardElevation="0dp"
-                            app:cardBackgroundColor="@color/brand_background">
+                            app:strokeColor="@color/green_dark"
+                            app:strokeWidth="1dp">
 
-                            <RelativeLayout
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
                                 android:padding="12dp">
 
                                 <LinearLayout
-                                    android:layout_width="wrap_content"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_alignParentStart="true"
-                                    android:layout_toStartOf="@+id/radioClaro"
+                                    android:layout_weight="1"
                                     android:orientation="vertical">
 
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="Claro"
+                                        android:text="@string/tema_claro"
                                         android:textColor="@color/green_dark"
-                                        android:textSize="14sp"
+                                        android:textSize="15sp"
                                         android:textStyle="bold" />
 
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
-                                        android:text="Siempre iluminado"
+                                        android:text="@string/tema_claro_desc"
                                         android:textColor="@color/text_secondary"
-                                        android:textSize="10sp" />
+                                        android:textSize="12sp" />
                                 </LinearLayout>
 
                                 <RadioButton
                                     android:id="@+id/radioClaro"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_alignParentEnd="true"
-                                    android:layout_centerVertical="true"
-                                    android:buttonTint="@color/green_dark"
-                                    android:checked="true" />
-                            </RelativeLayout>
-                        </androidx.cardview.widget.CardView>
+                                    android:checked="true"
+                                    android:clickable="false"
+                                    android:focusable="false"
+                                    app:buttonTint="@color/radio_tint_color" />
+                            </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
 
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/brand_background"
-                            android:layout_marginVertical="4dp"/>
-
-                        <!-- Opción 2: Oscuro -->
-                        <RelativeLayout
+                        <!-- Oscuro -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardTemaOscuro"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="12dp">
+                            android:layout_marginBottom="8dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            app:cardBackgroundColor="@color/card_background"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="0dp"
+                            app:strokeColor="@color/green_light_bg"
+                            app:strokeWidth="1dp">
 
                             <LinearLayout
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_alignParentStart="true"
-                                android:layout_toStartOf="@+id/radioOscuro"
-                                android:orientation="vertical">
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:padding="12dp">
 
-                                <TextView
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/tema_oscuro"
+                                        android:textColor="@color/green_dark"
+                                        android:textSize="15sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/tema_oscuro_desc"
+                                        android:textColor="@color/text_secondary"
+                                        android:textSize="12sp" />
+                                </LinearLayout>
+
+                                <RadioButton
+                                    android:id="@+id/radioOscuro"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Oscuro"
-                                    android:textColor="@color/green_dark"
-                                    android:textSize="14sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Reduce el brillo"
-                                    android:textColor="@color/text_secondary"
-                                    android:textSize="10sp" />
+                                    android:clickable="false"
+                                    android:focusable="false"
+                                    app:buttonTint="@color/radio_tint_color" />
                             </LinearLayout>
+                        </com.google.android.material.card.MaterialCardView>
 
-                            <RadioButton
-                                android:id="@+id/radioOscuro"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_centerVertical="true"
-                                android:buttonTint="@color/green_muted" />
-                        </RelativeLayout>
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="1dp"
-                            android:background="@color/brand_background"
-                            android:layout_marginVertical="4dp"/>
-
-                        <!-- Opción 3: Reactivo -->
-                        <RelativeLayout
+                        <!-- Reactivo -->
+                        <com.google.android.material.card.MaterialCardView
+                            android:id="@+id/cardTemaReactivo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:padding="12dp">
+                            android:clickable="true"
+                            android:focusable="true"
+                            app:cardBackgroundColor="@color/card_background"
+                            app:cardCornerRadius="12dp"
+                            app:cardElevation="0dp"
+                            app:strokeColor="@color/green_light_bg"
+                            app:strokeWidth="1dp">
 
                             <LinearLayout
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_alignParentStart="true"
-                                android:layout_toStartOf="@+id/radioReactivo"
-                                android:orientation="vertical">
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal"
+                                android:padding="12dp">
 
-                                <TextView
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/tema_reactivo"
+                                        android:textColor="@color/green_dark"
+                                        android:textSize="15sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/tema_reactivo_desc"
+                                        android:textColor="@color/text_secondary"
+                                        android:textSize="12sp" />
+                                </LinearLayout>
+
+                                <RadioButton
+                                    android:id="@+id/radioReactivo"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="Reactivo"
-                                    android:textColor="@color/green_dark"
-                                    android:textSize="14sp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Según tu hora local"
-                                    android:textColor="@color/text_secondary"
-                                    android:textSize="10sp" />
+                                    android:clickable="false"
+                                    android:focusable="false"
+                                    app:buttonTint="@color/radio_tint_color" />
                             </LinearLayout>
-
-                            <RadioButton
-                                android:id="@+id/radioReactivo"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_centerVertical="true"
-                                android:buttonTint="@color/green_muted" />
-                        </RelativeLayout>
-
-                    </RadioGroup>
-
+                        </com.google.android.material.card.MaterialCardView>
+                    </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -320,9 +353,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/card_background"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="0dp"
-                app:cardBackgroundColor="@color/card_background">
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -330,72 +363,77 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <!-- CABECERA -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
                         android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="16dp">
+                        android:orientation="horizontal">
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="32dp"
                             android:layout_height="32dp"
+                            app:cardBackgroundColor="@color/green_light_bg"
                             app:cardCornerRadius="8dp"
-                            app:cardElevation="0dp"
-                            app:cardBackgroundColor="@color/brand_background">
+                            app:cardElevation="0dp">
+
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:src="@android:drawable/ic_lock_silent_mode"
-                                app:tint="@color/green_dark"
+                                android:importantForAccessibility="no"
                                 android:padding="6dp"
-                                android:contentDescription="Icono Umbrales"/>
+                                android:src="@android:drawable/ic_menu_preferences"
+                                app:tint="@color/green_dark" />
                         </androidx.cardview.widget.CardView>
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="12dp"
+                            android:layout_weight="1"
                             android:orientation="vertical">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Umbrales de alerta"
-                                android:textStyle="bold"
+                                android:text="@string/umbrales_title"
                                 android:textColor="@color/green_dark"
-                                android:textSize="14sp"/>
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Sensibilidad y tiempo de respuesta"
+                                android:text="@string/umbrales_subtitle"
                                 android:textColor="@color/text_secondary"
-                                android:textSize="11sp"/>
+                                android:textSize="12sp" />
                         </LinearLayout>
                     </LinearLayout>
 
-                    <!-- Control de Vibración Mínima -->
+                    <!-- Vibración mínima -->
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Vibración mínima"
-                            android:textStyle="bold"
+                            android:layout_alignParentStart="true"
+                            android:text="@string/vibracion_minima"
                             android:textColor="@color/green_dark"
-                            android:textSize="13sp"
-                            android:layout_alignParentStart="true"/>
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
+
                         <TextView
                             android:id="@+id/tvValorVibracion"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="0.5 g"
-                            android:textStyle="bold"
+                            android:layout_alignParentEnd="true"
+                            android:text="@string/vibracion_default"
                             android:textColor="@color/green_dark"
-                            android:textSize="13sp"
-                            android:layout_alignParentEnd="true"/>
+                            android:textSize="14sp"
+                            android:textStyle="bold" />
                     </RelativeLayout>
 
                     <SeekBar
@@ -403,40 +441,45 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:contentDescription="@string/cd_seek_vibracion"
                         android:max="100"
                         android:progress="50"
+                        android:progressBackgroundTint="@color/green_light_bg"
                         android:progressTint="@color/green_dark"
-                        android:thumbTint="@color/green_dark"/>
+                        android:thumbTint="@color/green_dark" />
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
-                        android:paddingHorizontal="12dp"
-                        android:layout_marginBottom="20dp">
+                        android:layout_marginBottom="20dp"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp">
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Más sensible"
-                            android:textColor="@color/green_muted"
-                            android:textSize="9sp"
-                            android:layout_alignParentStart="true"/>
+                            android:layout_alignParentStart="true"
+                            android:text="@string/sensible_mas"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp" />
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Menos sensible"
-                            android:textColor="@color/green_muted"
-                            android:textSize="9sp"
-                            android:layout_alignParentEnd="true"/>
+                            android:layout_alignParentEnd="true"
+                            android:text="@string/sensible_menos"
+                            android:textColor="@color/text_secondary"
+                            android:textSize="11sp" />
                     </RelativeLayout>
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="@color/brand_background"
-                        android:layout_marginBottom="16dp"/>
+                        android:layout_marginBottom="16dp"
+                        android:background="@color/green_light_bg" />
 
-                    <!-- Retraso de Alarma -->
+                    <!-- Retraso de alarma -->
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -444,61 +487,72 @@
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
                             android:layout_alignParentStart="true"
-                            android:layout_toStartOf="@+id/cardSelectorTiempo">
+                            android:layout_centerVertical="true"
+                            android:layout_marginEnd="8dp"
+                            android:layout_toStartOf="@+id/cardSelectorTiempo"
+                            android:orientation="vertical">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Retraso de alarma"
-                                android:textStyle="bold"
+                                android:text="@string/retraso_title"
                                 android:textColor="@color/green_dark"
-                                android:textSize="13sp"/>
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Tiempo para desarmar tras una apertura"
+                                android:text="@string/retraso_subtitle"
                                 android:textColor="@color/text_secondary"
-                                android:textSize="10sp"/>
+                                android:textSize="12sp" />
                         </LinearLayout>
 
-                        <androidx.cardview.widget.CardView
+                        <com.google.android.material.card.MaterialCardView
                             android:id="@+id/cardSelectorTiempo"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_centerVertical="true"
-                            app:cardCornerRadius="48dp"
-                            app:cardElevation="0dp"
-                            app:cardBackgroundColor="@color/brand_background"
                             android:clickable="true"
-                            android:focusable="true">
+                            android:focusable="true"
+                            app:cardBackgroundColor="@color/green_light_bg"
+                            app:cardCornerRadius="20dp"
+                            app:cardElevation="0dp"
+                            app:strokeWidth="0dp">
+
                             <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal"
                                 android:gravity="center_vertical"
-                                android:paddingHorizontal="12dp"
-                                android:paddingVertical="8dp">
+                                android:minWidth="48dp"
+                                android:minHeight="48dp"
+                                android:orientation="horizontal"
+                                android:paddingStart="14dp"
+                                android:paddingTop="8dp"
+                                android:paddingEnd="14dp"
+                                android:paddingBottom="8dp">
+
                                 <TextView
                                     android:id="@+id/tvTiempoRetraso"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:text="10 segundos"
-                                    android:textStyle="bold"
+                                    android:layout_marginEnd="6dp"
+                                    android:text="@string/retraso_default"
                                     android:textColor="@color/green_dark"
-                                    android:textSize="12sp"
-                                    android:layout_marginEnd="6dp"/>
+                                    android:textSize="13sp"
+                                    android:textStyle="bold" />
+
                                 <ImageView
                                     android:layout_width="14dp"
                                     android:layout_height="14dp"
+                                    android:importantForAccessibility="no"
                                     android:src="@android:drawable/arrow_down_float"
-                                    app:tint="@color/green_dark"
-                                    android:contentDescription="Desplegar"/>
+                                    app:tint="@color/green_dark" />
                             </LinearLayout>
-                        </androidx.cardview.widget.CardView>
+                        </com.google.android.material.card.MaterialCardView>
                     </RelativeLayout>
-
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
@@ -507,9 +561,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/card_background"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="0dp"
-                app:cardBackgroundColor="@color/card_background">
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -517,97 +571,92 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <!-- CABECERA -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
                         android:gravity="center_vertical"
-                        android:orientation="horizontal"
-                        android:layout_marginBottom="16dp">
+                        android:orientation="horizontal">
 
                         <androidx.cardview.widget.CardView
                             android:layout_width="32dp"
                             android:layout_height="32dp"
+                            app:cardBackgroundColor="@color/green_light_bg"
                             app:cardCornerRadius="8dp"
-                            app:cardElevation="0dp"
-                            app:cardBackgroundColor="@color/brand_background">
+                            app:cardElevation="0dp">
+
                             <ImageView
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:src="@android:drawable/ic_lock_silent_mode"
-                                app:tint="@color/green_dark"
+                                android:importantForAccessibility="no"
                                 android:padding="6dp"
-                                android:contentDescription="Icono Unidades"/>
+                                android:src="@android:drawable/ic_menu_compass"
+                                app:tint="@color/green_dark" />
                         </androidx.cardview.widget.CardView>
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="12dp"
+                            android:layout_weight="1"
                             android:orientation="vertical">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Unidades"
-                                android:textStyle="bold"
+                                android:text="@string/unidades_title"
                                 android:textColor="@color/green_dark"
-                                android:textSize="14sp"/>
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Medición del sensor de vibración"
+                                android:text="@string/unidades_subtitle"
                                 android:textColor="@color/text_secondary"
-                                android:textSize="11sp"/>
+                                android:textSize="12sp" />
                         </LinearLayout>
                     </LinearLayout>
 
-                    <!-- Selector de unidades g y m/s² -->
+                    <!-- Selector g / m/s² (usa el drawable bg_tab_selected de la pantalla Funciones) -->
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
-                        android:layout_height="40dp"
-                        app:cardCornerRadius="10dp"
-                        app:cardElevation="0dp"
-                        app:cardBackgroundColor="@color/brand_background">
+                        android:layout_height="56dp"
+                        app:cardBackgroundColor="@color/green_light_bg"
+                        app:cardCornerRadius="14dp"
+                        app:cardElevation="0dp">
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:padding="3dp"
-                            android:orientation="horizontal">
+                            android:orientation="horizontal"
+                            android:padding="4dp">
 
-                            <!-- Opción g -->
-                            <androidx.cardview.widget.CardView
-                                android:layout_width="0dp"
+                            <TextView
+                                android:id="@+id/btnUnidadG"
+                                android:layout_width="48dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                app:cardCornerRadius="8dp"
-                                app:cardElevation="0dp"
-                                app:cardBackgroundColor="@color/card_background">
-                                <TextView
-                                    android:id="@+id/btnUnidadG"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="match_parent"
-                                    android:text="g"
-                                    android:gravity="center"
-                                    android:textColor="@color/green_dark"
-                                    android:textStyle="bold"
-                                    android:textSize="12sp"
-                                    android:clickable="true"
-                                    android:focusable="true"/>
-                            </androidx.cardview.widget.CardView>
+                                android:background="@drawable/bg_tab_selected"
+                                android:clickable="true"
+                                android:focusable="true"
+                                android:gravity="center"
+                                android:text="@string/unidad_g"
+                                android:textColor="@color/green_dark"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
 
-                            <!-- Opción m/s² -->
                             <TextView
                                 android:id="@+id/btnUnidadMS"
-                                android:layout_width="0dp"
+                                android:layout_width="48dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:text="m/s²"
-                                android:gravity="center"
-                                android:textColor="@color/text_secondary"
-                                android:textSize="12sp"
                                 android:clickable="true"
-                                android:focusable="true"/>
+                                android:focusable="true"
+                                android:gravity="center"
+                                android:text="@string/unidad_ms"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="13sp" />
                         </LinearLayout>
                     </androidx.cardview.widget.CardView>
                 </LinearLayout>
@@ -618,9 +667,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
+                app:cardBackgroundColor="@color/card_background"
                 app:cardCornerRadius="20dp"
-                app:cardElevation="0dp"
-                app:cardBackgroundColor="@color/card_background">
+                app:cardElevation="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -628,167 +677,191 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <!-- CABECERA -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            app:cardBackgroundColor="@color/green_light_bg"
+                            app:cardCornerRadius="8dp"
+                            app:cardElevation="0dp">
+
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:importantForAccessibility="no"
+                                android:padding="6dp"
+                                android:src="@android:drawable/ic_popup_reminder"
+                                app:tint="@color/green_dark" />
+                        </androidx.cardview.widget.CardView>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/pref_notif_title"
+                                android:textColor="@color/green_dark"
+                                android:textSize="15sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/pref_notif_subtitle"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="12sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <!-- Alertas importantes -->
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:orientation="horizontal"
-                        android:layout_marginBottom="8dp">
-
-                        <androidx.cardview.widget.CardView
-                            android:layout_width="32dp"
-                            android:layout_height="32dp"
-                            app:cardCornerRadius="8dp"
-                            app:cardElevation="0dp"
-                            app:cardBackgroundColor="@color/brand_background">
-                            <ImageView
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:src="@android:drawable/ic_popup_reminder"
-                                app:tint="@color/green_dark"
-                                android:padding="6dp"
-                                android:contentDescription="Icono Notificaciones"/>
-                        </androidx.cardview.widget.CardView>
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp">
 
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_weight="1"
                             android:orientation="vertical">
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Notificaciones"
-                                android:textStyle="bold"
-                                android:textColor="@color/green_dark"
-                                android:textSize="14sp"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Elige qué eventos quieres recibir"
-                                android:textColor="@color/text_secondary"
-                                android:textSize="11sp"/>
-                        </LinearLayout>
-                    </LinearLayout>
 
-                    <!-- Alertas importantes -->
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:paddingVertical="10dp">
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_alignParentStart="true"
-                            android:layout_toStartOf="@+id/switchAlertas">
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Alertas importantes"
-                                android:textStyle="bold"
+                                android:text="@string/alertas_title"
                                 android:textColor="@color/green_dark"
-                                android:textSize="13sp"/>
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Aperturas y activación de alarma"
+                                android:text="@string/alertas_desc"
                                 android:textColor="@color/text_secondary"
-                                android:textSize="10sp"/>
+                                android:textSize="12sp" />
                         </LinearLayout>
+
                         <androidx.appcompat.widget.SwitchCompat
                             android:id="@+id/switchAlertas"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
                             android:checked="true"
-                            app:thumbTint="@color/card_background"
-                            app:trackTint="@color/green_dark"/>
-                    </RelativeLayout>
+                            android:contentDescription="@string/alertas_title"
+                            android:minHeight="48dp"
+                            app:thumbTint="@color/switch_thumb_color"
+                            app:trackTint="@color/switch_track_color" />
+                    </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="@color/brand_background" />
+                        android:background="@color/green_light_bg" />
 
                     <!-- Estado de conexión -->
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingVertical="10dp">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp">
+
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_alignParentStart="true"
-                            android:layout_toStartOf="@+id/switchConexion">
+                            android:layout_marginEnd="8dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Estado de conexión"
-                                android:textStyle="bold"
+                                android:text="@string/conexion_title"
                                 android:textColor="@color/green_dark"
-                                android:textSize="13sp"/>
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Dispositivos conectados o sin señal"
+                                android:text="@string/conexion_desc"
                                 android:textColor="@color/text_secondary"
-                                android:textSize="10sp"/>
+                                android:textSize="12sp" />
                         </LinearLayout>
+
                         <androidx.appcompat.widget.SwitchCompat
                             android:id="@+id/switchConexion"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
                             android:checked="true"
-                            app:thumbTint="@color/card_background"
-                            app:trackTint="@color/green_dark"/>
-                    </RelativeLayout>
+                            android:contentDescription="@string/conexion_title"
+                            android:minHeight="48dp"
+                            app:thumbTint="@color/switch_thumb_color"
+                            app:trackTint="@color/switch_track_color" />
+                    </LinearLayout>
 
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="1dp"
-                        android:background="@color/brand_background" />
+                        android:background="@color/green_light_bg" />
 
                     <!-- Reportes de datos -->
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:paddingVertical="10dp">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingTop="6dp"
+                        android:paddingBottom="6dp">
+
                         <LinearLayout
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_alignParentStart="true"
-                            android:layout_toStartOf="@+id/switchReportes">
+                            android:layout_marginEnd="8dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Reportes de datos"
-                                android:textStyle="bold"
+                                android:text="@string/reportes_title"
                                 android:textColor="@color/green_dark"
-                                android:textSize="13sp"/>
+                                android:textSize="14sp"
+                                android:textStyle="bold" />
+
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Resumen diario de lecturas"
+                                android:text="@string/reportes_desc"
                                 android:textColor="@color/text_secondary"
-                                android:textSize="10sp"/>
+                                android:textSize="12sp" />
                         </LinearLayout>
+
                         <androidx.appcompat.widget.SwitchCompat
                             android:id="@+id/switchReportes"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:layout_centerVertical="true"
                             android:checked="false"
-                            app:thumbTint="@color/card_background"
-                            app:trackTint="@color/green_muted"/>
-                    </RelativeLayout>
+                            android:contentDescription="@string/reportes_title"
+                            android:minHeight="48dp"
+                            app:thumbTint="@color/switch_thumb_color"
+                            app:trackTint="@color/switch_track_color" />
+                    </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
@@ -799,18 +872,80 @@
         android:id="@+id/bottomNav"
         android:layout_width="0dp"
         android:layout_height="56dp"
-        android:orientation="horizontal"
+        android:background="@color/card_background"
+        android:elevation="8dp"
         android:gravity="center"
-        android:background="#FFFFFF"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-        <TextView android:id="@+id/navInicio" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="Inicio" android:gravity="center" android:textSize="10sp" android:textColor="#707070"/>
-        <TextView android:id="@+id/navDispositivos" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="Dispositivos" android:gravity="center" android:textSize="10sp" android:textColor="#707070"/>
-        <TextView android:id="@+id/navFunciones" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="Funciones" android:gravity="center" android:textSize="10sp" android:textColor="#707070"/>
-        <TextView android:id="@+id/navAjustes" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="Ajustes" android:gravity="center" android:textSize="10sp" android:textColor="#133B2B" android:textStyle="bold"/>
-        <TextView android:id="@+id/navBloquear" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="Bloquear" android:gravity="center" android:textSize="10sp" android:textColor="#707070"/>
+        <TextView
+            android:id="@+id/navInicio"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="@string/nav_inicio"
+            android:textColor="@color/nav_inactive"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/navDispositivos"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="@string/nav_dispositivos"
+            android:textColor="@color/nav_inactive"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/navFunciones"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="@string/nav_funciones"
+            android:textColor="@color/nav_inactive"
+            android:textSize="12sp" />
+
+        <!-- Pestaña activa -->
+        <TextView
+            android:id="@+id/navAjustes"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="@string/nav_ajustes"
+            android:textColor="@color/green_dark"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/navBloquear"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
+            android:gravity="center"
+            android:text="@string/nav_bloquear"
+            android:textColor="@color/nav_inactive"
+            android:textSize="12sp" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

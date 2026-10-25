@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources><string name="func_overline">AUTOMATIZACIÓN</string>
+    <string name="func_title">Funciones</string>
+    <string name="func_subtitle">Control y análisis avanzado</string>
+    <string name="cd_analiticas">Ver analíticas</string>
+
+    <string name="horarios_title">Programación de horarios</string>
+    <string name="horarios_subtitle">Automatiza el armado y desarmado</string>
+    <string name="cd_switch_horarios">Activar programación de horarios</string>
+    <string name="horarios_armar_label">ARMAR A LAS</string>
+    <string name="horarios_desarmar_label">DESARMAR A LAS</string>
+    <string name="horarios_hora_armar">22:00</string>
+    <string name="horarios_hora_desarmar">07:00</string>
+    <string name="horarios_status">●  5 días activos. Próximo armado hoy a las 22:00</string>
+
+    <string name="day_l">L</string>
+    <string name="day_m">M</string>
+    <string name="day_x">X</string>
+    <string name="day_j">J</string>
+    <string name="day_v">V</string>
+    <string name="day_s">S</string>
+    <string name="day_d">D</string>
+    <string name="cd_day_l">Lunes</string>
+    <string name="cd_day_m">Martes</string>
+    <string name="cd_day_x">Miércoles</string>
+    <string name="cd_day_j">Jueves</string>
+    <string name="cd_day_v">Viernes</string>
+    <string name="cd_day_s">Sábado</string>
+    <string name="cd_day_d">Domingo</string>
+
+    <string name="analisis_title">Análisis del sistema</string>
+    <string name="analisis_subtitle">Actividad de las últimas 24 horas</string>
+    <string name="analisis_valor">0.02 g</string>
+    <string name="analisis_valor_label">Promedio actual</string>
+    <string name="tab_vibracion">Vibración</string>
+    <string name="tab_eventos">Eventos</string>
+    <string name="tab_senal">Señal</string>
+    <string name="cd_chart">Gráfica de barras de la actividad de las últimas 24 horas</string>
+    <string name="chart_x_start">00:00</string>
+    <string name="chart_x_mid">12:00</string>
+    <string name="chart_x_end">Ahora</string>
+
+    <string name="alarma_title">Alarma manual</string>
+    <string name="alarma_subtitle">Activa la alarma ante una emergencia</string>
+    <string name="alarma_warning">La activación manual hará sonar la alarma inmediatamente y enviará una notificación a todos los usuarios.</string>
+    <string name="alarma_button">Activar alarma manual</string>
+</resources>

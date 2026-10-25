@@ -2,7 +2,8 @@
 <resources>
     <!-- Colores base de la aplicación -->
     <color name="brand_background">#F5F7F6</color> <!-- Fondo gris claro de la pantalla -->
-    <color name="card_background">#E3EDE8</color>  <!-- Fondo blanco de las tarjetas -->
+    <color name="card_background">#FFFFFF</color>  <!-- Fondo blanco de las tarjetas -->
+    <color name="screen_background">#F5F7F6</color>
 
     <!-- Gama de Verdes (Automatización y Análisis) -->
     <color name="green_dark">#1B4332</color>       <!-- Verde principal (Títulos, switch activo, días activos) -->

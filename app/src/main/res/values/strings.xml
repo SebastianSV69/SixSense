@@ -1,32 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">SixSense</string>
-    <string name="notif_overline">CENTRO DE ACTIVIDADES</string>
-    <string name="notif_title">Notificaciones</string>
-    <string name="notif_subtitle">Historial de eventos y alertas</string>
-
-    <string name="alert_title">Alerta importante</string>
-    <string name="alert_source">Sensor magnético - Entrada principal</string>
-    <string name="alert_badge_now">AHORA</string>
-    <string name="alert_headline">Se detectó una apertura</string>
-    <string name="alert_body">La alarma sonora se activará automáticamente. Si eres tú, desarma el sistema antes de que termine el tiempo.</string>
-    <string name="alert_countdown_title">Tiempo para desarmar</string>
-    <string name="alert_countdown_detail">Se notificó la apertura detectada</string>
-    <string name="alert_disarm">Desarmar sistema</string>
-    <string name="countdown_default">0</string>
-
-    <string name="history_title">Historial</string>
-    <string name="history_subtitle">Alertas y reportes recientes</string>
-    <string name="history_status_empty">Sin eventos</string>
-    <string name="history_empty_title">No hay registros guardados</string>
-    <string name="history_empty_body">Las alertas y notificaciones del sistema aparecerán detalladas en esta lista.</string>
 
     <string name="nav_inicio">Inicio</string>
     <string name="nav_dispositivos">Dispositivos</string>
     <string name="nav_funciones">Funciones</string>
     <string name="nav_ajustes">Ajustes</string>
     <string name="nav_bloquear">Bloquear</string>
-
-    <string name="cd_alerta">Alerta</string>
-    <string name="cd_countdown">Segundos restantes para desarmar</string>
-    <string name="cd_historial_vacio">Historial vacío</string>
 </resources>

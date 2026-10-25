@@ -107,7 +107,7 @@
                                 android:layout_height="match_parent"
                                 android:contentDescription="@string/cd_alerta"
                                 android:padding="8dp"
-                                android:src="@android:drawable/ic_dialog_alert"
+                                android:src="@drawable/ic_warning"
                                 app:tint="@color/card_background" />
                         </androidx.cardview.widget.CardView>
 

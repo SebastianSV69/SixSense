@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="ajustes_overline">PREFERENCIAS</string>
+    <string name="ajustes_title">Ajustes</string>
+    <string name="ajustes_subtitle">Configuración general y seguridad</string>
+
+    <string name="cd_user">Usuario</string>
+    <string name="user_name">Usuario</string>
+    <string name="user_role">Administrador del sistema</string>
+
+    <string name="apariencia_title">Apariencia</string>
+    <string name="apariencia_subtitle">Selecciona cómo quieres ver la aplicación</string>
+    <string name="tema_claro">Claro</string>
+    <string name="tema_claro_desc">Siempre iluminado</string>
+    <string name="tema_oscuro">Oscuro</string>
+    <string name="tema_oscuro_desc">Reduce el brillo</string>
+    <string name="tema_reactivo">Reactivo</string>
+    <string name="tema_reactivo_desc">Según tu hora local</string>
+
+    <string name="umbrales_title">Umbrales de alerta</string>
+    <string name="umbrales_subtitle">Sensibilidad y tiempo de respuesta</string>
+    <string name="vibracion_minima">Vibración mínima</string>
+    <string name="vibracion_default">0.50 g</string>
+    <string name="cd_seek_vibracion">Vibración mínima para activar una alerta</string>
+    <string name="sensible_mas">Más sensible</string>
+    <string name="sensible_menos">Menos sensible</string>
+    <string name="retraso_title">Retraso de alarma</string>
+    <string name="retraso_subtitle">Tiempo para desarmar tras una apertura</string>
+    <string name="retraso_default">10 segundos</string>
+
+    <string name="unidades_title">Unidades</string>
+    <string name="unidades_subtitle">Medición del sensor de vibración</string>
+    <string name="unidad_g">g</string>
+    <string name="unidad_ms">m/s²</string>
+
+    <string name="pref_notif_title">Notificaciones</string>
+    <string name="pref_notif_subtitle">Elige qué eventos quieres recibir</string>
+    <string name="alertas_title">Alertas importantes</string>
+    <string name="alertas_desc">Aperturas y activación de alarma</string>
+    <string name="conexion_title">Estado de conexión</string>
+    <string name="conexion_desc">Dispositivos conectados o sin señal</string>
+    <string name="reportes_title">Reportes de datos</string>
+    <string name="reportes_desc">Resumen diario de lecturas</string>
+</resources>
