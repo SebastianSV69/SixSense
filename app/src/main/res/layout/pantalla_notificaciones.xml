@@ -57,7 +57,7 @@
         android:paddingEnd="20dp"
         android:paddingBottom="16dp"
         android:scrollbars="none"
-        app:layout_constraintBottom_toTopOf="@id/bottomNav"
+        app:layout_constraintBottom_toTopOf="@id/barraNavegacion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/layoutHeaderNotif">
@@ -372,82 +372,13 @@
     </ScrollView>
 
     <!-- BARRA DE NAVEGACIÓN INFERIOR -->
-    <LinearLayout
-        android:id="@+id/bottomNav"
+    <include
+        android:id="@+id/barraNavegacion"
+        layout="@layout/include_barra_navegacion"
         android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:background="@color/card_background"
-        android:elevation="8dp"
-        android:gravity="center"
-        android:orientation="horizontal"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <TextView
-            android:id="@+id/navInicio"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center"
-            android:text="@string/nav_inicio"
-            android:textColor="@color/nav_inactive"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/navDispositivos"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center"
-            android:text="@string/nav_dispositivos"
-            android:textColor="@color/nav_inactive"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/navFunciones"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center"
-            android:text="@string/nav_funciones"
-            android:textColor="@color/nav_inactive"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/navAjustes"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center"
-            android:text="@string/nav_ajustes"
-            android:textColor="@color/nav_inactive"
-            android:textSize="12sp" />
-
-        <TextView
-            android:id="@+id/navBloquear"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:background="?attr/selectableItemBackground"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center"
-            android:text="@string/nav_bloquear"
-            android:textColor="@color/nav_inactive"
-            android:textSize="12sp" />
-    </LinearLayout>
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

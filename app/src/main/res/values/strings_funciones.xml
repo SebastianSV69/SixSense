@@ -44,4 +44,5 @@
     <string name="alarma_subtitle">Activa la alarma ante una emergencia</string>
     <string name="alarma_warning">La activación manual hará sonar la alarma inmediatamente y enviará una notificación a todos los usuarios.</string>
     <string name="alarma_button">Activar alarma manual</string>
+    <string name="alarma_activo">Alarma Activada</string>
 </resources>
