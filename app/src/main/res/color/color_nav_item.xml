@@ -1,0 +1,5 @@
+<!-- res/color/color_nav_item.xml -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:color="@color/verde_primario" android:state_selected="true" />
+    <item android:color="@color/nav_inactivo" />
+</selector>

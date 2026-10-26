@@ -1,0 +1,6 @@
+<!-- bg_punto_notificacion.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="@color/rojo_punto" />
+    <stroke android:width="2dp" android:color="@color/blanco" />
+</shape>

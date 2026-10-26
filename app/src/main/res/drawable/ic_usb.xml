@@ -1,0 +1,12 @@
+<!-- ic_usb.xml -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp" android:height="24dp"
+    android:viewportWidth="24" android:viewportHeight="24">
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M12,18V4 M10,6l2,-3 2,3z M12,13l-5,-3V8 M5.5,5h3v3h-3z M12,11l5,-3 M15,6a2,2 0 1,0 4,0a2,2 0 1,0 -4,0 M10,20a2,2 0 1,0 4,0a2,2 0 1,0 -4,0"
+        android:strokeColor="#000000"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="1.8" />
+</vector>

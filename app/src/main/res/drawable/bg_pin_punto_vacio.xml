@@ -1,0 +1,8 @@
+<!-- pin_punto_vacio.xml -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:width="12dp" android:height="12dp" android:gravity="center">
+        <shape android:shape="oval">
+            <stroke android:width="1.5dp" android:color="#9DB0A9" />
+        </shape>
+    </item>
+</layer-list>

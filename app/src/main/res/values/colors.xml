@@ -26,4 +26,72 @@
     <color name="overlay_white_20">#33FFFFFF</color>
     <color name="overlay_white_30">#40FFFFFF</color>
     <color name="overlay_black_15">#26000000</color>
+
+    <!-- Colores pantalla_bloqueo.xml -->
+
+    <color name="blanco">#FFFFFF</color>
+    <color name="fondo_bloqueo">#F8FAF8</color>
+    <color name="verde_primario">#1D5C48</color>
+    <color name="verde_marca">#173F33</color>
+    <color name="verde_menta">#8FD2B1</color>
+    <color name="verde_avatar">#245746</color>
+    <color name="verde_texto_enlace">#356A58</color>
+    <color name="boton_deshabilitado">#B0C6BC</color>
+    <color name="texto_principal">#17231F</color>
+    <color name="texto_teclas">#24342F</color>
+    <color name="texto_secundario">#71817C</color>
+    <color name="texto_etiqueta">#526660</color>
+    <color name="texto_hint">#A0ADA9</color>
+    <color name="texto_icono_campo">#70827C</color>
+    <color name="texto_pie">#8A9A95</color>
+    <color name="eyebrow">#668078</color>
+    <color name="borde_campo">#D9E3DF</color>
+
+    <!-- Colores pantalla_principal.xml -->
+
+    <color name="fondo_app">#F5F8F6</color>
+    <color name="verde_panel">#183F33</color>
+    <color name="verde_panel_armado">#155B44</color>
+    <color name="verde_icono">#356A58</color>
+    <color name="verde_icono_fondo">#EDF4F1</color>
+    <color name="verde_icono_hub">#205A47</color>
+    <color name="verde_icono_hub_fondo">#EAF3EF</color>
+    <color name="verde_chip_fondo">#E8F2ED</color>
+    <color name="verde_chip_texto">#38705D</color>
+    <color name="verde_estado">#4DA77F</color>
+    <color name="verde_etiqueta_estado">#5A8A7C</color>
+    <color name="verde_seleccion">#225B49</color>
+    <color name="verde_lectura">#2F6754</color>
+    <color name="verde_texto_boton">#164B39</color>
+    <color name="boton_armar_texto_deshabilitado">#90A39C</color>
+    <color name="texto_terciario">#8B9894</color>
+    <color name="texto_panel_etiqueta">#A7C6BB</color>
+    <color name="texto_panel_desc">#C3D7D0</color>
+    <color name="texto_selector_inactivo">#7B8984</color>
+    <color name="texto_estado_hub">#75857F</color>
+    <color name="borde">#E0E8E4</color>
+    <color name="divisor">#EDF1EF</color>
+    <color name="icono_nav_boton">#31453E</color>
+    <color name="nav_inactivo">#899792</color>
+    <color name="gris_estado">#A2AAA7</color>
+    <color name="gris_icono_fondo">#F0F2F1</color>
+    <color name="gris_icono">#8D9894</color>
+    <color name="chip_apagado_fondo">#E9ECEB</color>
+    <color name="chip_apagado_texto">#737F7B</color>
+    <color name="rojo_estado">#D36552</color>
+    <color name="rojo_punto">#DD6B55</color>
+    <color name="rojo_texto">#8A392E</color>
+    <color name="rojo_secundario">#9D5B51</color>
+    <color name="rojo_icono_fondo">#FBE2DC</color>
+    <color name="rojo_seleccion">#B95040</color>
+    <color name="chip_desconectado_fondo">#FAE9E5</color>
+    <color name="chip_desconectado_texto">#A64A3C</color>
+
+    <!-- Colores pantalla_dispositivos.xml -->
+    <color name="scrim_hoja">#66101D18</color>
+    <color name="handle_hoja">#D5DEDA</color>
+    <color name="verde_panel_icono">#2B574A</color>
+    <color name="chip_panel_fondo">#33FFFFFF</color>
+    <color name="borde_punteado">#B4C9C0</color>
+    <color name="fondo_punteado">#F8FBF9</color>
 </resources>

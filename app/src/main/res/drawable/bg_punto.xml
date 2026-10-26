@@ -1,0 +1,5 @@
+<!-- bg_punto.xml (puntito menta del logo) -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+    <solid android:color="@color/verde_menta" />
+</shape>

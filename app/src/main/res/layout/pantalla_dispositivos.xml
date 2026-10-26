@@ -1,85 +1,224 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/raiz"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F7F6"
-    android:padding="20dp">
+    android:background="@color/fondo_app">
 
-    <!-- ENCABEZADO -->
-    <LinearLayout
-        android:id="@+id/layoutHeaderDev"
+    <!-- ============ CONTENIDO ============ -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollDispositivos"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginTop="12dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toTopOf="@id/barraNavegacion"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="MI SISTEMA"
-                android:textSize="10sp"
-                android:textStyle="bold"
-                android:textColor="#8A9A8B"
-                android:letterSpacing="0.1"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Dispositivos"
-                android:textSize="26sp"
-                android:textStyle="bold"
-                android:textColor="#133B2B"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="4 dispositivos vinculados"
-                android:textSize="11sp"
-                android:textColor="#707070"/>
-        </LinearLayout>
-
-        <!-- Botón de añadir (+) -->
-        <Button
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:text="+"
-            android:textColor="#FFFFFF"
-            android:textSize="20sp"
-            android:backgroundTint="#133B2B"
-            app:cornerRadius="12dp"/>
-    </LinearLayout>
-
-    <!-- TARJETA RED DEL SISTEMA -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardNetwork"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="2dp"
-        app:cardBackgroundColor="#133B2B"
-        app:layout_constraintTop_toBottomOf="@id/layoutHeaderDev"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
+            android:paddingStart="20dp"
+            android:paddingTop="16dp"
+            android:paddingEnd="20dp"
+            android:paddingBottom="24dp">
+
+            <!-- Encabezado -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:letterSpacing="0.14"
+                android:text="@string/disp_eyebrow"
+                android:textColor="@color/eyebrow"
+                android:textSize="10sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="@string/disp_titulo"
+                android:textColor="@color/texto_principal"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/tvContador"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/texto_secundario"
+                android:textSize="12sp" />
+
+            <!-- Panel: Red del sistema -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:background="@drawable/bg_panel_estado"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <FrameLayout
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_caja_icono"
+                    android:backgroundTint="@color/verde_panel_icono">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_gravity="center"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_radio"
+                        app:tint="@color/verde_menta" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="14dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/red_titulo"
+                        android:textColor="@color/blanco"
+                        android:textSize="14sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="@string/red_descripcion"
+                        android:textColor="@color/texto_panel_desc"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvChipRed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_chip"
+                    android:backgroundTint="@color/chip_panel_fondo"
+                    android:paddingStart="10dp"
+                    android:paddingTop="5dp"
+                    android:paddingEnd="10dp"
+                    android:paddingBottom="5dp"
+                    android:textColor="@color/blanco"
+                    android:textSize="11sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Título de sección -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="26dp"
+                android:text="@string/lista_titulo"
+                android:textColor="@color/texto_principal"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:text="@string/lista_subtitulo"
+                android:textColor="@color/texto_terciario"
+                android:textSize="11sp" />
+
+            <!-- Lista (las filas se crean desde Kotlin) -->
+            <LinearLayout
+                android:id="@+id/listaDispositivos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_card"
+                android:clipToOutline="true"
+                android:orientation="vertical" />
+
+            <!-- Botón vincular -->
+            <LinearLayout
+                android:id="@+id/btnVincularNuevo"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/bg_boton_punteado"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/accion_vincular_nuevo"
+                    android:textColor="@color/verde_texto_boton"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- ============ BARRA DE NAVEGACIÓN ============ -->
+    <include
+        android:id="@+id/barraNavegacion"
+        layout="@layout/include_barra_navegacion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <!-- ============ CAPA: BOTTOM SHEET ============ -->
+    <View
+        android:id="@+id/scrim"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/scrim_hoja"
+        android:visibility="gone" />
+
+    <LinearLayout
+        android:id="@+id/hojaVincular"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_hoja_inferior"
+        android:clickable="true"
+        android:elevation="16dp"
+        android:focusable="true"
+        android:orientation="vertical"
+        android:paddingStart="22dp"
+        android:paddingTop="10dp"
+        android:paddingEnd="22dp"
+        android:paddingBottom="22dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <View
+            android:layout_width="40dp"
+            android:layout_height="4dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/bg_handle_hoja" />
+
+        <!-- Cabecera de la hoja -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
             android:gravity="center_vertical"
-            android:padding="16dp">
+            android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -88,228 +227,455 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/tvPaso"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Red del sistema"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"/>
+                    android:letterSpacing="0.12"
+                    android:textColor="@color/eyebrow"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/tvTituloHoja"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Todos los dispositivos responden correctamente"
-                    android:textSize="11sp"
-                    android:textColor="#D3DDD8"
-                    android:layout_marginTop="2dp"/>
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:textColor="@color/texto_principal"
+                    android:textSize="22sp" />
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="4/4"
-                android:textStyle="bold"
-                android:textSize="12sp"
-                android:textColor="#133B2B"
-                android:background="#D3DDD8"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="4dp"/>
+            <FrameLayout
+                android:id="@+id/btnCerrarHoja"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:background="@drawable/bg_caja_icono"
+                android:backgroundTint="@color/gris_icono_fondo"
+                android:clickable="true"
+                android:contentDescription="@string/hoja_cerrar"
+                android:focusable="true">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="center"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_cerrar"
+                    app:tint="@color/texto_etiqueta" />
+            </FrameLayout>
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
 
-    <!-- TÍTULO SECCIÓN -->
-    <LinearLayout
-        android:id="@+id/layoutSectionTitleDev"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/cardNetwork"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Dispositivos vinculados"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:textColor="#133B2B"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Equipos registrados en tu sistema"
-            android:textSize="11sp"
-            android:textColor="#707070"/>
-    </LinearLayout>
-
-    <!-- LISTA DE DISPOSITIVOS Y BOTÓN DE VINCULACIÓN -->
-    <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintTop_toBottomOf="@id/layoutSectionTitleDev"
-        app:layout_constraintBottom_toTopOf="@id/bottomNav"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
+        <!-- Barra de progreso -->
         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginTop="14dp"
+            android:orientation="horizontal">
+
+            <View
+                android:id="@+id/segmento1"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_chip"
+                android:backgroundTint="@color/verde_primario" />
+
+            <View
+                android:id="@+id/segmento2"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/bg_chip"
+                android:backgroundTint="@color/borde_campo" />
+        </LinearLayout>
+
+        <!-- ===== PASO 1: Datos ===== -->
+        <LinearLayout
+            android:id="@+id/pasoDatos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <!-- 1. Arduino Uno -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                app:cardCornerRadius="14dp"
-                app:cardElevation="1dp"
-                app:cardBackgroundColor="#FFFFFF">
+                android:layout_marginTop="20dp"
+                android:text="@string/campo_nombre"
+                android:textColor="@color/texto_etiqueta"
+                android:textSize="11sp"
+                android:textStyle="bold" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="14dp">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Arduino Uno" android:textStyle="bold" android:textColor="#133B2B" android:textSize="15sp"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Controlador central · Sala principal" android:textSize="11sp" android:textColor="#707070"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🟢 Conectado por USB" android:textSize="11sp" android:textColor="#2E7D32" android:layout_marginTop="2dp"/>
-                    </LinearLayout>
-
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=">" android:textSize="18sp" android:textColor="#707070"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <!-- 2. Sensor puerta -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                app:cardCornerRadius="14dp"
-                app:cardElevation="1dp"
-                app:cardBackgroundColor="#FFFFFF">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="14dp">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sensor puerta" android:textStyle="bold" android:textColor="#133B2B" android:textSize="15sp"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sensor magnético · Entrada principal" android:textSize="11sp" android:textColor="#707070"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🟢 Conectado por Cableado" android:textSize="11sp" android:textColor="#2E7D32" android:layout_marginTop="2dp"/>
-                    </LinearLayout>
-
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=">" android:textSize="18sp" android:textColor="#707070"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <!-- 3. Sensor ventana -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                app:cardCornerRadius="14dp"
-                app:cardElevation="1dp"
-                app:cardBackgroundColor="#FFFFFF">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="14dp">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sensor ventana" android:textStyle="bold" android:textColor="#133B2B" android:textSize="15sp"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sensor de vibración · Habitación" android:textSize="11sp" android:textColor="#707070"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🟢 Conectado por Cableado" android:textSize="11sp" android:textColor="#2E7D32" android:layout_marginTop="2dp"/>
-                    </LinearLayout>
-
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=">" android:textSize="18sp" android:textColor="#707070"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <!-- 4. Alarma principal -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="12dp"
-                app:cardCornerRadius="14dp"
-                app:cardElevation="1dp"
-                app:cardBackgroundColor="#FFFFFF">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="14dp">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alarma principal" android:textStyle="bold" android:textColor="#133B2B" android:textSize="15sp"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alarma sonora · Pasillo" android:textSize="11sp" android:textColor="#707070"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="🟢 Conectado por Cableado" android:textSize="11sp" android:textColor="#2E7D32" android:layout_marginTop="2dp"/>
-                    </LinearLayout>
-
-                    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text=">" android:textSize="18sp" android:textColor="#707070"/>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <!-- Botón Vincular nuevo dispositivo -->
-            <Button
+            <EditText
+                android:id="@+id/etNombre"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:text="+ Vincular nuevo dispositivo"
-                android:textColor="#133B2B"
-                android:backgroundTint="#E2ECE9"
-                android:textStyle="bold"
-                app:cornerRadius="14dp"/>
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_campo_texto"
+                android:hint="@string/campo_nombre_hint"
+                android:imeOptions="actionNext"
+                android:importantForAutofill="no"
+                android:inputType="textCapSentences"
+                android:maxLines="1"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:singleLine="true"
+                android:textColor="@color/texto_principal"
+                android:textColorHint="@color/texto_hint"
+                android:textSize="13sp" />
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/campo_tipo"
+                android:textColor="@color/texto_etiqueta"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp">
+
+                <Spinner
+                    android:id="@+id/spTipo"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/bg_campo_texto"
+                    android:dropDownVerticalOffset="52dp"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="40dp"
+                    android:popupBackground="@drawable/bg_popup_spinner"
+                    android:spinnerMode="dropdown" />
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="end|center_vertical"
+                    android:layout_marginEnd="16dp"
+                    android:importantForAccessibility="no"
+                    android:rotation="90"
+                    android:src="@drawable/ic_chevron_derecha"
+                    app:tint="@color/texto_etiqueta" />
+            </FrameLayout>
+            <TextView
+                android:id="@+id/tvTipoBloqueado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="@string/tipo_bloqueado"
+                android:textColor="@color/texto_terciario"
+                android:textSize="10sp"
+                android:visibility="gone" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/campo_ubicacion"
+                android:textColor="@color/texto_etiqueta"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etUbicacion"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_campo_texto"
+                android:hint="@string/campo_ubicacion_hint"
+                android:imeOptions="actionDone"
+                android:importantForAutofill="no"
+                android:inputType="textCapSentences"
+                android:maxLines="1"
+                android:paddingStart="16dp"
+                android:paddingEnd="16dp"
+                android:singleLine="true"
+                android:textColor="@color/texto_principal"
+                android:textColorHint="@color/texto_hint"
+                android:textSize="13sp" />
+
+            <LinearLayout
+                android:id="@+id/btnContinuar"
+                android:layout_width="match_parent"
+                android:layout_height="52dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_btn_primario"
+                android:clickable="true"
+                android:enabled="false"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/accion_continuar"
+                    android:textColor="@color/blanco"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="6dp"
+                    android:importantForAccessibility="no"
+                    android:src="@drawable/ic_chevron_derecha"
+                    app:tint="@color/blanco" />
+            </LinearLayout>
         </LinearLayout>
-    </ScrollView>
 
-    <!-- BARRA DE NAVEGACIÓN INFERIOR -->
-    <LinearLayout
-        android:id="@+id/bottomNav"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:background="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        <!-- ===== PASO 2: Método de conexión ===== -->
+        <LinearLayout
+            android:id="@+id/pasoConexion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
 
-        <TextView android:id="@+id/navInicio" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="Inicio" android:gravity="center" android:textSize="10sp" android:textColor="#707070"/>
-        <TextView android:id="@+id/navDispositivos" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="Dispositivos" android:gravity="center" android:textSize="10sp" android:textColor="#133B2B" android:textStyle="bold"/>
-        <TextView android:id="@+id/navFunciones" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="Funciones" android:gravity="center" android:textSize="10sp" android:textColor="#707070"/>
-        <TextView android:id="@+id/navAjustes" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="Ajustes" android:gravity="center" android:textSize="10sp" android:textColor="#707070"/>
-        <TextView android:id="@+id/navBloquear" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="Bloquear" android:gravity="center" android:textSize="10sp" android:textColor="#707070"/>
+            <TextView
+                android:id="@+id/tvSubtituloConexion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:textColor="@color/texto_secundario"
+                android:textSize="12sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:id="@+id/opcCableado"
+                    android:layout_width="0dp"
+                    android:layout_height="58dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_opcion_conexion"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="14dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/ic_cable"
+                            app:tint="@color/color_nav_item" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/conexion_cableado"
+                            android:textColor="@color/color_nav_item"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="top|end"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/bg_radio_opcion" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/opcUsb"
+                    android:layout_width="0dp"
+                    android:layout_height="58dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_opcion_conexion"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="14dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/ic_usb"
+                            app:tint="@color/color_nav_item" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/conexion_usb"
+                            android:textColor="@color/color_nav_item"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="top|end"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/bg_radio_opcion" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <FrameLayout
+                    android:id="@+id/opcBluetooth"
+                    android:layout_width="0dp"
+                    android:layout_height="58dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_opcion_conexion"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="14dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/ic_bluetooth"
+                            app:tint="@color/color_nav_item" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/conexion_bluetooth"
+                            android:textColor="@color/color_nav_item"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="top|end"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/bg_radio_opcion" />
+                </FrameLayout>
+
+                <FrameLayout
+                    android:id="@+id/opcWifi"
+                    android:layout_width="0dp"
+                    android:layout_height="58dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_opcion_conexion"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingStart="14dp"
+                        android:paddingEnd="14dp">
+
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/ic_wifi"
+                            app:tint="@color/color_nav_item" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
+                            android:text="@string/conexion_wifi"
+                            android:textColor="@color/color_nav_item"
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="top|end"
+                        android:layout_margin="8dp"
+                        android:background="@drawable/bg_radio_opcion" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/btnAtras"
+                    android:layout_width="0dp"
+                    android:layout_height="52dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/bg_boton_secundario"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:text="@string/accion_atras"
+                    android:textColor="@color/texto_teclas"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/btnVincular"
+                    android:layout_width="0dp"
+                    android:layout_height="52dp"
+                    android:layout_marginStart="10dp"
+                    android:layout_weight="1.6"
+                    android:background="@drawable/bg_btn_primario"
+                    android:clickable="true"
+                    android:enabled="false"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:text="@string/accion_vincular"
+                    android:textColor="@color/blanco"
+                    android:textSize="13sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/btnEliminar"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/bg_boton_eliminar"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:text="@string/accion_eliminar"
+                    android:textColor="@color/rojo_texto"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+            </LinearLayout>
+        </LinearLayout>
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

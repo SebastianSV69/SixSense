@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Encabezado y lista -->
+    <string name="disp_eyebrow">MI SISTEMA</string>
+    <string name="disp_titulo">Dispositivos</string>
+    <plurals name="disp_vinculados">
+        <item quantity="one">%d dispositivo vinculado</item>
+        <item quantity="other">%d dispositivos vinculados</item>
+    </plurals>
+    <string name="red_titulo">Red del sistema</string>
+    <string name="red_descripcion">Todos los dispositivos responden correctamente</string>
+    <string name="red_contador">%1$d/%2$d</string>
+    <string name="lista_titulo">Dispositivos vinculados</string>
+    <string name="lista_subtitulo">Equipos registrados en tu sistema</string>
+    <string name="accion_vincular_nuevo">+  Vincular nuevo dispositivo</string>
+    <string name="fila_detalle">%1$s · %2$s</string>
+    <string name="fila_conectado_por">Conectado por %1$s</string>
+
+    <!-- Tipos de dispositivo -->
+    <string name="tipo_sensor_magnetico">Sensor magnético</string>
+    <string name="tipo_sensor_vibracion">Sensor de vibración</string>
+    <string name="tipo_alarma_sonora">Alarma sonora</string>
+    <string name="tipo_arduino_uno">Arduino Uno</string>
+    <string name="rol_controlador_central">Controlador central</string>
+
+    <!-- Métodos de conexión -->
+    <string name="conexion_cableado">Cableado</string>
+    <string name="conexion_usb">USB</string>
+    <string name="conexion_bluetooth">Bluetooth</string>
+    <string name="conexion_wifi">Wi-Fi</string>
+
+    <!-- Bottom sheet -->
+    <string name="hoja_paso_formato">PASO %1$d DE %2$d</string>
+    <string name="hoja_titulo_datos">Datos del dispositivo</string>
+    <string name="hoja_titulo_conexion">Método de conexión</string>
+    <string name="hoja_cerrar">Cerrar</string>
+    <string name="campo_nombre">Nombre</string>
+    <string name="campo_nombre_hint">Ej. Sensor ventana</string>
+    <string name="campo_tipo">Tipo de dispositivo</string>
+    <string name="campo_ubicacion">Ubicación</string>
+    <string name="campo_ubicacion_hint">Ej. Ventana de la sala</string>
+    <string name="accion_continuar">Continuar</string>
+    <string name="accion_atras">Atrás</string>
+    <string name="accion_vincular">Vincular dispositivo</string>
+    <string name="conexion_subtitulo">Selecciona cómo se comunica con %1$s.</string>
+
+    <!-- Edición -->
+    <string name="hoja_titulo_editar">Editar dispositivo</string>
+    <string name="accion_guardar">Guardar cambios</string>
+    <string name="accion_eliminar">Eliminar dispositivo</string>
+    <string name="tipo_bloqueado">El tipo de dispositivo no se puede cambiar</string>
+    <string name="eliminar_titulo">¿Eliminar dispositivo?</string>
+    <string name="eliminar_mensaje">Se eliminará %1$s del sistema. Esta acción no se puede deshacer.</string>
+    <string name="accion_cancelar">Cancelar</string>
+    <string name="accion_eliminar_confirmar">Eliminar</string>
+    <string name="toast_eliminado">Dispositivo eliminado</string>
+</resources>

@@ -1,0 +1,6 @@
+<!-- bg_chip.xml (se pinta con backgroundTint) -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/blanco" />
+    <corners android:radius="9dp" />
+</shape>

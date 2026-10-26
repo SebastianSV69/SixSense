@@ -1,0 +1,12 @@
+<!-- ic_settings.xml -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp" android:height="24dp"
+    android:viewportWidth="24" android:viewportHeight="24">
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M9,12a3,3 0 1,0 6,0a3,3 0 1,0 -6,0 M19.4,15a1.8,1.8 0 0,0 0.36,2l0.06,0.06 -2.83,2.83 -0.06,-0.06a1.8,1.8 0 0,0 -2,-0.36 1.8,1.8 0 0,0 -1.1,1.65V21h-4v-0.08A1.8,1.8 0 0,0 8.7,19.3a1.8,1.8 0 0,0 -2,0.36l-0.06,0.06 -2.83,-2.83 0.06,-0.06a1.8,1.8 0 0,0 0.36,-2A1.8,1.8 0 0,0 2.6,13.7H2.5v-4h0.1a1.8,1.8 0 0,0 1.64,-1.1 1.8,1.8 0 0,0 -0.36,-2l-0.06,-0.06 2.83,-2.83 0.06,0.06a1.8,1.8 0 0,0 2,0.36A1.8,1.8 0 0,0 9.8,2.5V2.4h4v0.1a1.8,1.8 0 0,0 1.1,1.64 1.8,1.8 0 0,0 2,-0.36l0.06,-0.06 2.83,2.83 -0.06,0.06a1.8,1.8 0 0,0 -0.36,2 1.8,1.8 0 0,0 1.64,1.1h0.1v4H21a1.8,1.8 0 0,0 -1.6,1.3z"
+        android:strokeColor="#000000"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:strokeWidth="1.8" />
+</vector>

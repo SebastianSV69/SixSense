@@ -1,356 +1,453 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/raiz"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F7F6"
-    android:padding="20dp">
+    android:background="@color/fondo_app"
+    tools:context=".PantallaPrincipal">
 
-    <!-- ENCABEZADO -->
-    <LinearLayout
-        android:id="@+id/layoutHeaderMain"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginTop="12dp"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="0dp"
+        android:overScrollMode="never"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@id/barraNavegacion"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="BUENOS DÍAS"
-                android:textSize="10sp"
-                android:textStyle="bold"
-                android:textColor="#8A9A8B"
-                android:letterSpacing="0.1"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Tu hogar"
-                android:textSize="26sp"
-                android:textStyle="bold"
-                android:textColor="#133B2B"/>
-        </LinearLayout>
-
-        <!-- Botón Notificaciones con insignia -->
-        <FrameLayout
-            android:id="@+id/btnNotificaciones"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:background="@android:drawable/ic_menu_agenda">
-            <View
-                android:layout_width="8dp"
-                android:layout_height="8dp"
-                android:background="@android:drawable/presence_busy"
-                android:layout_gravity="top|end"/>
-        </FrameLayout>
-    </LinearLayout>
-
-    <!-- TARJETA DE ESTADO DE SEGURIDAD -->
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardSecurity"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="2dp"
-        app:cardBackgroundColor="#133B2B"
-        app:layout_constraintTop_toBottomOf="@id/layoutHeaderMain"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="20dp">
+            android:paddingStart="23dp"
+            android:paddingTop="29dp"
+            android:paddingEnd="23dp"
+            android:paddingBottom="24dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="ESTADO DE SEGURIDAD"
-                android:textSize="10sp"
-                android:textStyle="bold"
-                android:textColor="#8A9A8B"
-                android:letterSpacing="0.1"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sistema desarmado"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="#FFFFFF"
-                android:layout_marginTop="6dp"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="El sistema está listo para activar la protección"
-                android:textSize="12sp"
-                android:textColor="#D3DDD8"
-                android:layout_marginTop="2dp"/>
-
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:text="Armar sistema"
-                android:textColor="#133B2B"
-                android:backgroundTint="#FFFFFF"
-                android:textStyle="bold"
-                app:cornerRadius="12dp"
-                android:layout_marginTop="16dp"/>
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-    <!-- TÍTULO SECCIÓN DISPOSITIVOS -->
-    <LinearLayout
-        android:id="@+id/layoutSectionTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center_vertical"
-        android:layout_marginTop="16dp"
-        app:layout_constraintTop_toBottomOf="@id/cardSecurity"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sistema y dispositivos"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                android:textColor="#133B2B"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Controlador central y últimas lecturas"
-                android:textSize="11sp"
-                android:textColor="#707070"/>
-        </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="4 activos"
-            android:textSize="11sp"
-            android:textColor="#133B2B"
-            android:background="#E2ECE9"
-            android:paddingHorizontal="10dp"
-            android:paddingVertical="4dp"/>
-    </LinearLayout>
-
-    <!-- LISTA DE DISPOSITIVOS -->
-    <ScrollView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintTop_toBottomOf="@id/layoutSectionTitle"
-        app:layout_constraintBottom_toTopOf="@id/bottomNav"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <!-- Arduino Uno -->
-            <androidx.cardview.widget.CardView
+            <!-- Encabezado -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                app:cardCornerRadius="14dp"
-                app:cardElevation="1dp"
-                app:cardBackgroundColor="#FFFFFF">
+                android:layout_marginBottom="25dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="14dp">
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
+                    <TextView
+                        android:id="@+id/tvSaludoHora"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:gravity="center_vertical">
-
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Arduino Uno"
-                            android:textStyle="bold"
-                            android:textColor="#133B2B"/>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="📶 98%"
-                            android:textSize="11sp"
-                            android:textColor="#707070"/>
-                    </LinearLayout>
+                        android:letterSpacing="0.15"
+                        android:text="@string/saludo_dias"
+                        android:textColor="@color/eyebrow"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="🟢 Controlador central • Encendido"
+                        android:layout_marginTop="6dp"
+                        android:letterSpacing="-0.04"
+                        android:text="Tu hogar"
+                        android:textColor="@color/texto_principal"
+                        android:textSize="28sp" />
+                </LinearLayout>
+
+                <FrameLayout
+                    android:id="@+id/btnNotificaciones"
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_boton_notificacion"
+                    android:clickable="true"
+                    android:contentDescription="Notificaciones"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:layout_gravity="center"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_bell"
+                        app:tint="@color/icono_nav_boton" />
+
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="10dp"
+                        android:layout_gravity="top|end"
+                        android:layout_marginTop="9dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/bg_punto_notificacion" />
+                </FrameLayout>
+            </LinearLayout>
+
+            <!-- Panel de estado de seguridad -->
+            <LinearLayout
+                android:id="@+id/panelEstado"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_panel_estado"
+                android:elevation="4dp"
+                android:orientation="vertical"
+                android:padding="22dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <FrameLayout
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:background="@drawable/bg_caja_icono_grande">
+
+                        <ImageView
+                            android:id="@+id/ivIconoEstado"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_gravity="center"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/iq_shield"
+                            app:tint="@color/blanco" />
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="14dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:letterSpacing="0.12"
+                            android:text="ESTADO DE SEGURIDAD"
+                            android:textColor="@color/texto_panel_etiqueta"
+                            android:textSize="10sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvTituloEstado"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:text="@string/sistema_desarmado"
+                            android:textColor="@color/blanco"
+                            android:textSize="20sp" />
+
+                        <TextView
+                            android:id="@+id/tvDescripcionEstado"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/desc_desarmado"
+                            android:textColor="@color/texto_panel_desc"
+                            android:textSize="11sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btnArmar"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="19dp"
+                    android:background="@drawable/bg_btn_armar"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/ivAccionArmar"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:duplicateParentState="true"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_power"
+                        app:tint="@color/color_boton_armar" />
+
+                    <TextView
+                        android:id="@+id/tvAccionArmar"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:duplicateParentState="true"
+                        android:text="@string/accion_armar"
+                        android:textColor="@color/color_boton_armar"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Alerta de desconexión -->
+            <LinearLayout
+                android:id="@+id/alertaSistema"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="14dp"
+                android:background="@drawable/bg_alerta_sistema"
+                android:orientation="horizontal"
+                android:padding="13dp"
+                android:visibility="gone">
+
+                <FrameLayout
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:background="@drawable/bg_caja_icono"
+                    android:backgroundTint="@color/rojo_icono_fondo">
+
+                    <ImageView
+                        android:layout_width="19dp"
+                        android:layout_height="19dp"
+                        android:layout_gravity="center"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_alert"
+                        app:tint="@color/rojo_texto" />
+                </FrameLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="11dp"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Arduino Uno sin conexión"
+                        android:textColor="@color/rojo_texto"
+                        android:textSize="13sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:text="Los componentes no están enviando ni recibiendo señales."
+                        android:textColor="@color/rojo_secundario"
+                        android:textSize="11sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Encabezado de la sección -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:layout_marginBottom="12dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Sistema y dispositivos"
+                        android:textColor="@color/texto_principal"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:text="Controlador central y últimas lecturas"
+                        android:textColor="@color/texto_terciario"
+                        android:textSize="11sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvBadgeDispositivos"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_chip"
+                    android:backgroundTint="@color/verde_chip_fondo"
+                    android:paddingStart="9dp"
+                    android:paddingTop="6dp"
+                    android:paddingEnd="9dp"
+                    android:paddingBottom="6dp"
+                    android:text="@string/badge_activos"
+                    android:textColor="@color/verde_chip_texto"
+                    android:textSize="10sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <!-- Tarjeta del controlador (Arduino Uno) -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="9dp"
+                android:background="@drawable/bg_card"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="13dp">
+
+                    <FrameLayout
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:background="@drawable/bg_caja_icono"
+                        android:backgroundTint="@color/verde_icono_hub_fondo">
+
+                        <ImageView
+                            android:layout_width="22dp"
+                            android:layout_height="22dp"
+                            android:layout_gravity="center"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/ic_chip"
+                            app:tint="@color/verde_icono_hub" />
+                    </FrameLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Arduino Uno"
+                            android:textColor="@color/texto_principal"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <View
+                                android:id="@+id/puntoEstadoHub"
+                                android:layout_width="6dp"
+                                android:layout_height="6dp"
+                                android:background="@drawable/bg_punto_estado"
+                                android:backgroundTint="@color/verde_estado" />
+
+                            <TextView
+                                android:id="@+id/tvEstadoHub"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="6dp"
+                                android:textColor="@color/texto_estado_hub"
+                                android:textSize="11sp"
+                                tools:text="Controlador central · Encendido" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_radio"
+                        app:tint="@color/texto_secundario" />
+
+                    <TextView
+                        android:id="@+id/tvSenal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:textColor="@color/texto_secundario"
                         android:textSize="11sp"
-                        android:textColor="#707070"
-                        android:layout_marginTop="2dp"/>
+                        android:textStyle="bold"
+                        tools:text="98%" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
 
-            <!-- Sensor de vibración -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                app:cardCornerRadius="14dp"
-                app:cardElevation="1dp"
-                app:cardBackgroundColor="#FFFFFF">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/divisor" />
 
+                <!-- Selector Encendido / Apagado / Sin conexión -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/bg_selector_estado"
                     android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="14dp">
+                    android:padding="4dp">
 
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                    <TextView
+                        android:id="@+id/btnEncendido"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_marginStart="2.5dp"
+                        android:layout_marginEnd="2.5dp"
                         android:layout_weight="1"
-                        android:orientation="vertical">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sensor de vibración" android:textStyle="bold" android:textColor="#133B2B"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Zona principal" android:textSize="11sp" android:textColor="#707070"/>
-                    </LinearLayout>
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:text="Encendido"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="end">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0.02 g" android:textStyle="bold" android:textColor="#133B2B"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sin vibraciones" android:textSize="10sp" android:textColor="#707070"/>
-                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/btnApagado"
+                        android:layout_width="34dp"
+                        android:layout_height="34dp"
+                        android:layout_marginStart="2.5dp"
+                        android:layout_marginEnd="2.5dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:text="Apagado"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/btnSinConexion"
+                        android:layout_width="0dp"
+                        android:layout_height="34dp"
+                        android:layout_marginStart="2.5dp"
+                        android:layout_marginEnd="2.5dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center"
+                        android:text="Sin conexión"
+                        android:textSize="11sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </LinearLayout>
 
-            <!-- Sensor magnético -->
-            <androidx.cardview.widget.CardView
+            <!-- Lista de componentes (se llena desde Kotlin) -->
+            <LinearLayout
+                android:id="@+id/listaComponentes"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
-                app:cardCornerRadius="14dp"
-                app:cardElevation="1dp"
-                app:cardBackgroundColor="#FFFFFF">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="14dp">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sensor magnético" android:textStyle="bold" android:textColor="#133B2B"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Puerta de entrada" android:textSize="11sp" android:textColor="#707070"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="end">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Cerrado" android:textStyle="bold" android:textColor="#133B2B"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Hace 2 s" android:textSize="10sp" android:textColor="#707070"/>
-                    </LinearLayout>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
-            <!-- Alarma sonora -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="14dp"
-                app:cardElevation="1dp"
-                app:cardBackgroundColor="#FFFFFF">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical"
-                    android:padding="14dp">
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Alarma sonora" android:textStyle="bold" android:textColor="#133B2B"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Salida de alerta" android:textSize="11sp" android:textColor="#707070"/>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:gravity="end">
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Lista" android:textStyle="bold" android:textColor="#133B2B"/>
-                        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="0 dB" android:textSize="10sp" android:textColor="#707070"/>
-                    </LinearLayout>
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
-
+                android:background="@drawable/bg_card"
+                android:orientation="vertical" />
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
-    <!-- BARRA DE NAVEGACIÓN INFERIOR -->
-    <LinearLayout
-        android:id="@+id/bottomNav"
+    <include
+        android:id="@+id/barraNavegacion"
+        layout="@layout/include_barra_navegacion"
         android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:background="#FFFFFF"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <TextView android:id="@+id/navInicio" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="Inicio" android:gravity="center" android:textSize="10sp" android:textColor="#133B2B" android:textStyle="bold"/>
-        <TextView android:id="@+id/navDispositivos" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="Dispositivos" android:gravity="center" android:textSize="10sp" android:textColor="#707070"/>
-        <TextView android:id="@+id/navFunciones" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="Funciones" android:gravity="center" android:textSize="10sp" android:textColor="#707070"/>
-        <TextView android:id="@+id/navAjustes" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="Ajustes" android:gravity="center" android:textSize="10sp" android:textColor="#707070"/>
-        <TextView android:id="@+id/navBloquear" android:layout_width="0dp" android:layout_height="match_parent" android:layout_weight="1" android:text="Bloquear" android:gravity="center" android:textSize="10sp" android:textColor="#707070"/>
-    </LinearLayout>
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

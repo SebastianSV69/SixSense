@@ -1,0 +1,13 @@
+<!-- pin_punto_lleno.xml (punto relleno + halo suave) -->
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:width="22dp" android:height="22dp" android:gravity="center">
+        <shape android:shape="oval">
+            <solid android:color="#171D5C48" />
+        </shape>
+    </item>
+    <item android:width="12dp" android:height="12dp" android:gravity="center">
+        <shape android:shape="oval">
+            <solid android:color="@color/verde_primario" />
+        </shape>
+    </item>
+</layer-list>

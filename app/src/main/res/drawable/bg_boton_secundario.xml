@@ -1,0 +1,17 @@
+<!-- bg_boton_secundario.xml -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_pressed="true">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/verde_icono_fondo" />
+            <stroke android:width="1dp" android:color="@color/borde_campo" />
+            <corners android:radius="16dp" />
+        </shape>
+    </item>
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/blanco" />
+            <stroke android:width="1dp" android:color="@color/borde_campo" />
+            <corners android:radius="16dp" />
+        </shape>
+    </item>
+</selector>

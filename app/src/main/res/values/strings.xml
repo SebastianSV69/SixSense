@@ -7,4 +7,33 @@
     <string name="nav_funciones">Funciones</string>
     <string name="nav_ajustes">Ajustes</string>
     <string name="nav_bloquear">Bloquear</string>
+
+    <!-- Strings pantalla_bloqueo.xml -->
+    <string name="bloqueo_saludo">Hola, %1$s</string>
+    <string name="bloqueo_instruccion_pin">Ingresa tu PIN para acceder a tu sistema.</string>
+    <string name="bloqueo_instruccion_contrasena">Ingresa tu contraseña para continuar.</string>
+    <string name="bloqueo_usar_contrasena">Usar contraseña</string>
+    <string name="bloqueo_usar_pin">Usar PIN</string>
+    <string name="bloqueo_pin_descripcion">%1$d de %2$d dígitos</string>
+
+    <!-- Strings pantalla_principal.xml -->
+    <string name="proximamente">Próximamente</string>
+    <string name="saludo_dias">BUENOS DÍAS</string>
+    <string name="saludo_tardes">BUENAS TARDES</string>
+    <string name="saludo_noches">BUENAS NOCHES</string>
+    <string name="sistema_armado">Sistema armado</string>
+    <string name="sistema_desarmado">Sistema desarmado</string>
+    <string name="desc_armado">Todos los sensores están monitoreando tu hogar</string>
+    <string name="desc_desarmado">El sistema está listo para activar la protección</string>
+    <string name="desc_apagado">Enciende el Arduino Uno para continuar</string>
+    <string name="accion_armar">Armar sistema</string>
+    <string name="accion_desarmar">Desarmar sistema</string>
+    <string name="hub_encendido">Encendido</string>
+    <string name="hub_apagado">Apagado</string>
+    <string name="hub_desconectado">Desconectado</string>
+    <string name="hub_estado_formato">Controlador central · %1$s</string>
+    <string name="badge_activos">4 activos</string>
+    <string name="comp_conectado">Conectado</string>
+    <string name="comp_en_espera">En espera</string>
+    <string name="comp_sin_senal">Sin señal</string>
 </resources>

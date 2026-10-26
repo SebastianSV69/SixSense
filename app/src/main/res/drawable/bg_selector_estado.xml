@@ -1,0 +1,6 @@
+<!-- bg_selector_estado.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="#F0F4F2" />
+    <corners android:radius="13dp" />
+</shape>
