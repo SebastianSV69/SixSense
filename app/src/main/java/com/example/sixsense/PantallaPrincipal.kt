@@ -26,14 +26,14 @@ class PantallaPrincipal : AppCompatActivity() {
     private enum class EstadoHub { ENCENDIDO, APAGADO, DESCONECTADO }
 
     private class Componente(
-        @DrawableRes val icono: Int,
+        @param:DrawableRes val icono: Int,
         val nombre: String,
         val rol: String,
         val lectura: String,
-        val etiquetaLectura: String
+        val etiquetaLectura: String,
     )
 
-    private class FilaComponente(val raiz: View) {
+    private class FilaComponente(raiz: View) {
         val divisor: View = raiz.findViewById(R.id.divisor)
         val cajaIcono: View = raiz.findViewById(R.id.cajaIcono)
         val ivIcono: ImageView = raiz.findViewById(R.id.ivIcono)
@@ -157,7 +157,7 @@ class PantallaPrincipal : AppCompatActivity() {
     }
 
     private fun saludoSegunHora(): Int =
-        when (Calendar.getInstance().get(Calendar.HOUR_OF_DAY)) {
+        when (Calendar.getInstance()[Calendar.HOUR_OF_DAY]) {
             in 5..11 -> R.string.saludo_dias
             in 12..19 -> R.string.saludo_tardes
             else -> R.string.saludo_noches
