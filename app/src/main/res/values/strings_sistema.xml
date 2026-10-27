@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Tiempos -->
+    <string name="hace_formato">Hace %1$s</string>
+    <string name="edad_segundos">%1$d s</string>
+    <string name="edad_minutos">%1$d min</string>
+    <string name="edad_horas">%1$d h</string>
+    <string name="sin_datos">Sin datos</string>
+
+    <!-- Estados de sensores y alarma -->
+    <string name="valor_abierto">Abierto</string>
+    <string name="valor_cerrado">Cerrado</string>
+    <string name="alarma_lista">Lista</string>
+    <string name="alarma_cuenta_atras">Cuenta atrás</string>
+    <string name="alarma_sonando">Sonando</string>
+    <string name="alarma_reposo">En reposo</string>
+    <string name="alarma_activa_corto">Activa</string>
+
+    <!-- Estado de la red -->
+    <string name="estado_en_linea">En línea</string>
+    <string name="estado_en_espera">En espera</string>
+    <string name="estado_sin_conexion">Sin conexión</string>
+
+    <!-- Panel de Principal -->
+    <string name="desc_cuenta_atras">Intrusión detectada. La alarma sonará en %1$d s</string>
+    <string name="desc_alarma_sonando">La alarma está sonando. Desarma el sistema para detenerla</string>
+    <string name="desc_sin_conexion">No hay conexión con ThingSpeak. Revisa tu Internet</string>
+
+    <!-- Tarjeta de alerta de Notificaciones -->
+    <string name="alert_source_confirmada">Vibración y sensor magnético - Entrada principal</string>
+    <string name="alert_headline_intrusion">Intrusión confirmada</string>
+    <string name="alert_body_intrusion">Se detectó vibración en el cerrojo y la apertura de la puerta. La alarma sonará automáticamente. Si eres tú, desarma el sistema antes de que termine el tiempo.</string>
+    <string name="alert_headline_alarma">La alarma está sonando</string>
+    <string name="alert_body_alarma">Desarma el sistema para detenerla.</string>
+
+    <!-- Eventos e historial -->
+    <string name="ev_vibracion_titulo">Vibración detectada</string>
+    <string name="ev_vibracion_detalle">El sensor del cerrojo registró %1$s. Alerta preventiva.</string>
+    <string name="ev_apertura_titulo">Apertura detectada</string>
+    <string name="ev_apertura_detalle">Se abrió la puerta principal. La alarma sonará en %1$d s si no desarmas el sistema.</string>
+    <string name="ev_intrusion_titulo">Intrusión confirmada</string>
+    <string name="ev_intrusion_detalle">Vibración en el cerrojo y apertura de la puerta. La alarma sonará en %1$d s si no desarmas el sistema.</string>
+    <string name="ev_intrusion_posterior_detalle">Se detectó vibración en el cerrojo tras la apertura. La alarma sonará en %1$d s si no desarmas el sistema.</string>
+    <string name="ev_alarma_titulo">Alarma activada</string>
+    <string name="ev_alarma_detalle">Terminó el tiempo para desarmar el sistema.</string>
+    <string name="ev_manual_titulo">Alarma manual activada</string>
+    <string name="ev_manual_detalle">Activada desde la pantalla Funciones.</string>
+    <string name="ev_desarme_titulo">Sistema desarmado</string>
+    <string name="ev_desarme_detalle">Se canceló la alarma.</string>
+    <string name="ev_detenida_titulo">Alarma detenida</string>
+    <string name="ev_detenida_detalle">Se apagó la alarma.</string>
+
+    <!-- Notificaciones del sistema -->
+    <string name="canal_alertas_nombre">Alertas de seguridad</string>
+    <string name="canal_alertas_desc">Vibración, aperturas y activación de la alarma</string>
+</resources>

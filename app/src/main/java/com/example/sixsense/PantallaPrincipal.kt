@@ -1,16 +1,21 @@
 package com.example.sixsense
 
-import android.content.Intent
+import android.Manifest
+import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.SystemBarStyle
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
@@ -20,17 +25,14 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import java.util.Calendar
+import kotlin.math.max
 
 class PantallaPrincipal : AppCompatActivity() {
 
-    private enum class EstadoHub { ENCENDIDO, APAGADO, DESCONECTADO }
-
     private class Componente(
-        @param:DrawableRes val icono: Int,
+        @DrawableRes val icono: Int,
         val nombre: String,
         val rol: String,
-        val lectura: String,
-        val etiquetaLectura: String,
     )
 
     private class FilaComponente(raiz: View) {
@@ -43,13 +45,12 @@ class PantallaPrincipal : AppCompatActivity() {
         val tvEtiqueta: TextView = raiz.findViewById(R.id.tvEtiqueta)
     }
 
-    private var armado = false
-    private var estadoHub = EstadoHub.ENCENDIDO
+    private enum class EstadoFila { NORMAL, ALERTA, SIN_DATOS }
 
     private val componentes = listOf(
-        Componente(R.drawable.ic_vibration, "Sensor de vibración", "Zona principal", "0.02 g", "Sin vibraciones"),
-        Componente(R.drawable.ic_magnet, "Sensor magnético", "Puerta de entrada", "Cerrado", "Hace 2 s"),
-        Componente(R.drawable.ic_siren, "Alarma sonora", "Salida de alerta", "Lista", "0 dB")
+        Componente(R.drawable.ic_vibration, "Sensor de vibración", "Cerrojo de la puerta"),
+        Componente(R.drawable.ic_magnet, "Sensor magnético", "Puerta de entrada"),
+        Componente(R.drawable.ic_siren, "Alarma sonora", "Salida de alerta"),
     )
     private val filas = mutableListOf<FilaComponente>()
 
@@ -65,10 +66,21 @@ class PantallaPrincipal : AppCompatActivity() {
     private lateinit var puntoEstadoHub: View
     private lateinit var tvEstadoHub: TextView
     private lateinit var tvSenal: TextView
-    private lateinit var btnEncendido: TextView
-    private lateinit var btnApagado: TextView
-    private lateinit var btnSinConexion: TextView
     private lateinit var listaComponentes: LinearLayout
+
+    private val manejador = Handler(Looper.getMainLooper())
+    private val oyente = OyenteSistema { render() }
+
+    // Refresca los "Hace X s" cada segundo mientras la pantalla está visible
+    private val reloj = object : Runnable {
+        override fun run() {
+            render()
+            manejador.postDelayed(this, 1000)
+        }
+    }
+
+    private val permisoNotificaciones =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge(
@@ -90,13 +102,12 @@ class PantallaPrincipal : AppCompatActivity() {
         puntoEstadoHub = findViewById(R.id.puntoEstadoHub)
         tvEstadoHub = findViewById(R.id.tvEstadoHub)
         tvSenal = findViewById(R.id.tvSenal)
-        btnEncendido = findViewById(R.id.btnEncendido)
-        btnApagado = findViewById(R.id.btnApagado)
-        btnSinConexion = findViewById(R.id.btnSinConexion)
         listaComponentes = findViewById(R.id.listaComponentes)
 
         ajustarBordesDelSistema()
-        configurarBarraNavegacion()
+        NavegacionInferior.configurar(this, Destino.INICIO)
+        ocultarSelectorDemo()
+        pedirPermisoNotificaciones()
 
         findViewById<TextView>(R.id.tvSaludoHora).setText(saludoSegunHora())
         findViewById<View>(R.id.btnNotificaciones).setOnClickListener {
@@ -106,14 +117,25 @@ class PantallaPrincipal : AppCompatActivity() {
         crearFilasComponentes()
 
         btnArmar.setOnClickListener {
-            armado = !armado
-            render()
+            SistemaSeguridad.alternarArmado()
+            SistemaSeguridad.consultarAhora()
         }
-        btnEncendido.setOnClickListener { cambiarEstadoHub(EstadoHub.ENCENDIDO) }
-        btnApagado.setOnClickListener { cambiarEstadoHub(EstadoHub.APAGADO) }
-        btnSinConexion.setOnClickListener { cambiarEstadoHub(EstadoHub.DESCONECTADO) }
 
         render()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        SistemaSeguridad.agregarOyente(oyente)
+        manejador.post(reloj)
+        // Si hay una alerta en curso (por ejemplo, al volver del bloqueo), va directo a Notificaciones
+        if (SistemaSeguridad.enAlerta) NavegacionInferior.abrirNotificaciones(this)
+    }
+
+    override fun onStop() {
+        manejador.removeCallbacks(reloj)
+        SistemaSeguridad.quitarOyente(oyente)
+        super.onStop()
     }
 
     // ---------- Configuración ----------
@@ -133,12 +155,22 @@ class PantallaPrincipal : AppCompatActivity() {
         }
     }
 
-    private fun configurarBarraNavegacion() {
-        NavegacionInferior.configurar(this, Destino.INICIO)
+    /** Los botones Encendido/Apagado/Sin conexión eran de prueba: ahora el estado viene de ThingSpeak. */
+    private fun ocultarSelectorDemo() {
+        val selector = findViewById<View>(R.id.btnEncendido).parent as View
+        selector.visibility = View.GONE
+        val contenedor = selector.parent as ViewGroup
+        val posicion = contenedor.indexOfChild(selector)
+        if (posicion > 0) contenedor.getChildAt(posicion - 1).visibility = View.GONE // divisor
     }
 
-    private fun avisoProximamente() {
-        Toast.makeText(this, R.string.proximamente, Toast.LENGTH_SHORT).show()
+    private fun pedirPermisoNotificaciones() {
+        if (Build.VERSION.SDK_INT >= 33 &&
+            ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS)
+            != PackageManager.PERMISSION_GRANTED
+        ) {
+            permisoNotificaciones.launch(Manifest.permission.POST_NOTIFICATIONS)
+        }
     }
 
     private fun saludoSegunHora(): Int =
@@ -161,31 +193,43 @@ class PantallaPrincipal : AppCompatActivity() {
         }
     }
 
-    private fun cambiarEstadoHub(nuevo: EstadoHub) {
-        estadoHub = nuevo
-        if (nuevo != EstadoHub.ENCENDIDO) armado = false
-        render()
-    }
-
     // ---------- Render ----------
 
     private fun render() {
-        val encendido = estadoHub == EstadoHub.ENCENDIDO
+        val s = SistemaSeguridad
+        val armado = s.armado
+        val cuenta = s.cuentaAtras
+        val sonando = s.alarmaActiva
+        val sinConexion = s.conexion == EstadoConexion.SIN_CONEXION
+        val enAlerta = cuenta != null || sonando
 
         // Panel de seguridad
         panelEstado.setBackgroundResource(
             if (armado) R.drawable.bg_panel_estado_armado else R.drawable.bg_panel_estado
         )
-        ivIconoEstado.setImageResource(if (armado) R.drawable.ic_lock else R.drawable.iq_shield)
-        tvTituloEstado.setText(if (armado) R.string.sistema_armado else R.string.sistema_desarmado)
-        tvDescripcionEstado.setText(
+        ivIconoEstado.setImageResource(
             when {
-                !encendido -> R.string.desc_apagado
-                armado -> R.string.desc_armado
-                else -> R.string.desc_desarmado
+                enAlerta -> R.drawable.ic_alert
+                armado -> R.drawable.ic_lock
+                else -> R.drawable.iq_shield
             }
         )
-        btnArmar.isEnabled = encendido
+        tvTituloEstado.setText(
+            when {
+                sonando -> R.string.alarma_activo
+                armado -> R.string.sistema_armado
+                else -> R.string.sistema_desarmado
+            }
+        )
+        tvDescripcionEstado.text = when {
+            sonando -> getString(R.string.desc_alarma_sonando)
+            cuenta != null -> getString(R.string.desc_cuenta_atras, cuenta)
+            sinConexion -> getString(R.string.desc_sin_conexion)
+            armado -> getString(R.string.desc_armado)
+            else -> getString(R.string.desc_desarmado)
+        }
+        // Siempre se puede desarmar; armar requiere conexión
+        btnArmar.isEnabled = armado || sonando || !sinConexion
         btnArmar.setBackgroundResource(
             if (armado) R.drawable.bg_btn_desarmar else R.drawable.bg_btn_armar
         )
@@ -193,88 +237,122 @@ class PantallaPrincipal : AppCompatActivity() {
         tvAccionArmar.setText(if (armado) R.string.accion_desarmar else R.string.accion_armar)
 
         // Alerta de desconexión
-        alertaSistema.isVisible = estadoHub == EstadoHub.DESCONECTADO
+        alertaSistema.isVisible = sinConexion
 
-        // Badge de la sección
-        when (estadoHub) {
-            EstadoHub.ENCENDIDO -> {
-                tvBadge.setText(R.string.badge_activos)
-                pintarBadge(R.color.verde_chip_fondo, R.color.verde_chip_texto)
-            }
-            EstadoHub.APAGADO -> {
-                tvBadge.setText(R.string.hub_apagado)
-                pintarBadge(R.color.chip_apagado_fondo, R.color.chip_apagado_texto)
-            }
-            EstadoHub.DESCONECTADO -> {
-                tvBadge.setText(R.string.hub_desconectado)
-                pintarBadge(R.color.chip_desconectado_fondo, R.color.chip_desconectado_texto)
-            }
-        }
-
-        // Tarjeta del Arduino
+        // Estado de la red
         val etiquetaEstado = getString(
-            when (estadoHub) {
-                EstadoHub.ENCENDIDO -> R.string.hub_encendido
-                EstadoHub.APAGADO -> R.string.hub_apagado
-                EstadoHub.DESCONECTADO -> R.string.hub_desconectado
+            when (s.conexion) {
+                EstadoConexion.CONECTADO -> R.string.estado_en_linea
+                EstadoConexion.EN_ESPERA -> R.string.estado_en_espera
+                EstadoConexion.SIN_CONEXION -> R.string.estado_sin_conexion
             }
         )
+        tvBadge.text = etiquetaEstado
+        when (s.conexion) {
+            EstadoConexion.CONECTADO -> pintarBadge(R.color.verde_chip_fondo, R.color.verde_chip_texto)
+            EstadoConexion.EN_ESPERA -> pintarBadge(R.color.chip_apagado_fondo, R.color.chip_apagado_texto)
+            EstadoConexion.SIN_CONEXION ->
+                pintarBadge(R.color.chip_desconectado_fondo, R.color.chip_desconectado_texto)
+        }
         tvEstadoHub.text = getString(R.string.hub_estado_formato, etiquetaEstado)
         puntoEstadoHub.backgroundTintList = ColorStateList.valueOf(
             color(
-                when (estadoHub) {
-                    EstadoHub.ENCENDIDO -> R.color.verde_estado
-                    EstadoHub.APAGADO -> R.color.gris_estado
-                    EstadoHub.DESCONECTADO -> R.color.rojo_estado
+                when (s.conexion) {
+                    EstadoConexion.CONECTADO -> R.color.verde_estado
+                    EstadoConexion.EN_ESPERA -> R.color.gris_estado
+                    EstadoConexion.SIN_CONEXION -> R.color.rojo_estado
                 }
             )
         )
-        tvSenal.text = if (encendido) "98%" else "—"
+        val ultima = max(s.magneticoMillis, s.vibracionMillis)
+        tvSenal.text = if (ultima == 0L) "—" else s.edadCorta(ultima)
 
-        // Selector Encendido / Apagado / Sin conexión
-        marcarSelector(btnEncendido, estadoHub == EstadoHub.ENCENDIDO)
-        marcarSelector(btnApagado, estadoHub == EstadoHub.APAGADO)
-        marcarSelector(btnSinConexion, estadoHub == EstadoHub.DESCONECTADO)
-
-        // Filas de componentes
-        val estadoComponente = getString(
-            when (estadoHub) {
-                EstadoHub.ENCENDIDO -> R.string.comp_conectado
-                EstadoHub.APAGADO -> R.string.comp_en_espera
-                EstadoHub.DESCONECTADO -> R.string.comp_sin_senal
+        // Sensor de vibración
+        val vib = s.vibracionG
+        val vibracionAlta = vib != null && vib >= Preferencias.umbralVibracionG
+        pintarFila(
+            filas[0],
+            lectura = if (vib != null) s.formatoVibracion(vib) else "—",
+            etiqueta = if (vib != null) s.haceTexto(s.vibracionMillis) else getString(R.string.sin_datos),
+            estado = when {
+                vib == null -> EstadoFila.SIN_DATOS
+                vibracionAlta -> EstadoFila.ALERTA
+                else -> EstadoFila.NORMAL
             }
         )
-        filas.forEachIndexed { indice, fila ->
-            val c = componentes[indice]
-            fila.tvLectura.text = if (encendido) c.lectura else "—"
-            fila.tvEtiqueta.text = if (encendido) c.etiquetaLectura else estadoComponente
-            fila.tvLectura.setTextColor(color(if (encendido) R.color.verde_lectura else R.color.gris_icono))
-            fila.tvEtiqueta.setTextColor(
-                color(if (encendido) R.color.texto_terciario else R.color.verde_etiqueta_estado)
+
+        // Sensor magnético
+        val abierto = s.magneticoAbierto
+        pintarFila(
+            filas[1],
+            lectura = when (abierto) {
+                null -> "—"
+                true -> getString(R.string.valor_abierto)
+                false -> getString(R.string.valor_cerrado)
+            },
+            etiqueta = if (abierto != null) s.haceTexto(s.magneticoMillis) else getString(R.string.sin_datos),
+            estado = when {
+                abierto == null -> EstadoFila.SIN_DATOS
+                abierto && armado -> EstadoFila.ALERTA
+                else -> EstadoFila.NORMAL
+            }
+        )
+
+        // Alarma sonora
+        when {
+            sonando -> pintarFila(
+                filas[2], getString(R.string.alarma_sonando),
+                getString(R.string.alarma_activa_corto), EstadoFila.ALERTA
             )
-            fila.ivIcono.imageTintList =
-                ColorStateList.valueOf(color(if (encendido) R.color.verde_icono else R.color.gris_icono))
-            fila.cajaIcono.backgroundTintList = ColorStateList.valueOf(
-                color(if (encendido) R.color.verde_icono_fondo else R.color.gris_icono_fondo)
+            cuenta != null -> pintarFila(
+                filas[2], getString(R.string.alarma_cuenta_atras),
+                getString(R.string.edad_segundos, cuenta), EstadoFila.ALERTA
+            )
+            else -> pintarFila(
+                filas[2], getString(R.string.alarma_lista),
+                getString(R.string.alarma_reposo), EstadoFila.NORMAL
             )
         }
+    }
+
+    private fun pintarFila(fila: FilaComponente, lectura: String, etiqueta: String, estado: EstadoFila) {
+        fila.tvLectura.text = lectura
+        fila.tvEtiqueta.text = etiqueta
+        fila.tvLectura.setTextColor(
+            color(
+                when (estado) {
+                    EstadoFila.NORMAL -> R.color.verde_lectura
+                    EstadoFila.ALERTA -> R.color.rojo_texto
+                    EstadoFila.SIN_DATOS -> R.color.gris_icono
+                }
+            )
+        )
+        fila.tvEtiqueta.setTextColor(
+            color(if (estado == EstadoFila.ALERTA) R.color.rojo_secundario else R.color.texto_terciario)
+        )
+        fila.ivIcono.imageTintList = ColorStateList.valueOf(
+            color(
+                when (estado) {
+                    EstadoFila.NORMAL -> R.color.verde_icono
+                    EstadoFila.ALERTA -> R.color.rojo_texto
+                    EstadoFila.SIN_DATOS -> R.color.gris_icono
+                }
+            )
+        )
+        fila.cajaIcono.backgroundTintList = ColorStateList.valueOf(
+            color(
+                when (estado) {
+                    EstadoFila.NORMAL -> R.color.verde_icono_fondo
+                    EstadoFila.ALERTA -> R.color.rojo_icono_fondo
+                    EstadoFila.SIN_DATOS -> R.color.gris_icono_fondo
+                }
+            )
+        )
     }
 
     private fun pintarBadge(@ColorRes fondo: Int, @ColorRes texto: Int) {
         tvBadge.backgroundTintList = ColorStateList.valueOf(color(fondo))
         tvBadge.setTextColor(color(texto))
-    }
-
-    private fun marcarSelector(boton: TextView, activo: Boolean) {
-        if (activo) {
-            boton.setBackgroundResource(R.drawable.bg_selector_activo)
-            boton.setTextColor(
-                color(if (estadoHub == EstadoHub.DESCONECTADO) R.color.rojo_seleccion else R.color.verde_seleccion)
-            )
-        } else {
-            boton.background = null
-            boton.setTextColor(color(R.color.texto_selector_inactivo))
-        }
     }
 
     private fun color(@ColorRes id: Int) = ContextCompat.getColor(this, id)

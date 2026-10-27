@@ -4,13 +4,10 @@ import android.animation.ValueAnimator
 import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Typeface
-import android.media.AudioAttributes
-import android.media.Ringtone
-import android.media.RingtoneManager
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
@@ -27,13 +24,14 @@ import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
 import java.util.Calendar
 import java.util.Locale
+import kotlin.math.max
 import kotlin.math.roundToInt
 
 /**
  * Pantalla de funciones:
  *  1. Programación de horarios (armado / desarmado automático): interruptor, horas y días.
- *  2. Análisis del sistema: gráfica de barras con pestañas Vibración / Eventos / Señal.
- *  3. Alarma manual: confirmación, sonido de alarma y botón para detenerla.
+ *  2. Análisis del sistema: gráfica de barras de las últimas 24 h (datos de ThingSpeak).
+ *  3. Alarma manual: confirmación y botón para detenerla. La sirena la gestiona SistemaSeguridad.
  */
 class PantallaFunciones : AppCompatActivity() {
 
@@ -42,11 +40,10 @@ class PantallaFunciones : AppCompatActivity() {
     /** Datos de una pestaña: altura de cada barra (en dp, máx. 100) y el valor que se muestra arriba. */
     private class Serie(val barras: IntArray, val resumen: String)
 
-    private val series = mapOf(
-        Pestana.VIBRACION to Serie(intArrayOf(20, 35, 15, 45, 55, 70, 40, 65, 80, 90), "0.02 g"),
-        Pestana.EVENTOS to Serie(intArrayOf(10, 10, 30, 10, 10, 50, 10, 10, 30, 10), "3 eventos"),
-        Pestana.SENAL to Serie(intArrayOf(85, 90, 88, 92, 95, 93, 96, 97, 98, 98), "98 %")
-    )
+    /** Hasta que lleguen los datos de ThingSpeak, se muestra una línea base sin valores. */
+    private var series: Map<Pestana, Serie> = Pestana.values().associateWith {
+        Serie(IntArray(NUM_BARRAS) { ALTURA_MINIMA }, TXT_SIN_DATOS)
+    }
 
     // Orden Lunes..Domingo (mismo orden que las vistas de los días)
     private val idsDias = intArrayOf(
@@ -63,10 +60,9 @@ class PantallaFunciones : AppCompatActivity() {
     private var minutosDesarmar = 7 * 60
     private var diasMascara = 0b0011111          // bit 0 = lunes ... bit 6 = domingo (por defecto L-V)
     private var pestanaActual = Pestana.VIBRACION
-    private var alarmaActiva = false
 
-    private var sirena: Ringtone? = null
     private var animadorGrafica: ValueAnimator? = null
+    private val oyente = OyenteSistema { renderAlarma() }
 
     // ---------- Vistas ----------
     private lateinit var scroll: ScrollView
@@ -110,29 +106,33 @@ class PantallaFunciones : AppCompatActivity() {
         cargarPreferencias()
         NavegacionInferior.configurar(this, Destino.FUNCIONES)
         configurarHorarios()
+        crearBarras()
         configurarAnalisis()
         configurarAlarma()
 
         findViewById<View>(R.id.btnAnaliticas).setOnClickListener { irAlAnalisis() }
+    }
 
-        // Si la pantalla se recrea (p. ej. al rotar) con la alarma sonando, se retoma
-        if (savedInstanceState?.getBoolean(KEY_ALARMA) == true) activarAlarma(avisar = false)
+    override fun onStart() {
+        super.onStart()
+        SistemaSeguridad.agregarOyente(oyente)
+        renderAlarma()
     }
 
     override fun onResume() {
         super.onResume()
         // "hoy / mañana" cambia con el tiempo
         renderEstadoHorarios()
+        cargarAnalisis()
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putBoolean(KEY_ALARMA, alarmaActiva)
+    override fun onStop() {
+        SistemaSeguridad.quitarOyente(oyente)
+        super.onStop()
     }
 
     override fun onDestroy() {
         animadorGrafica?.cancel()
-        detenerSirena()
         super.onDestroy()
     }
 
@@ -305,14 +305,101 @@ class PantallaFunciones : AppCompatActivity() {
         String.format(Locale.ROOT, "%02d:%02d", minutos / 60, minutos % 60)
 
     // =====================================================================
-    // 2. Análisis del sistema
+    // 2. Análisis del sistema (últimas 24 h, en 10 tramos de 2,4 h)
     // =====================================================================
+
+    /** El XML deja la gráfica vacía: las barras se crean aquí. */
+    private fun crearBarras() {
+        if (layoutChart.childCount > 0) return
+        val margen = (3 * resources.displayMetrics.density).roundToInt()
+        repeat(NUM_BARRAS) {
+            layoutChart.addView(
+                View(this),
+                LinearLayout.LayoutParams(0, 0, 1f).apply {
+                    marginStart = margen
+                    marginEnd = margen
+                }
+            )
+        }
+    }
 
     private fun configurarAnalisis() {
         pestanas.forEach { (pestana, vista) ->
             vista.setOnClickListener { seleccionarPestana(pestana, animar = true) }
         }
         seleccionarPestana(pestanaActual, animar = false)
+    }
+
+    /** Pide a ThingSpeak las lecturas de las últimas 24 h y redibuja la gráfica. */
+    private fun cargarAnalisis() {
+        SistemaSeguridad.consultarUltimas24h { lecturas ->
+            if (isFinishing || isDestroyed || lecturas == null) return@consultarUltimas24h
+            series = construirSeries(lecturas)
+            seleccionarPestana(pestanaActual, animar = true)
+        }
+    }
+
+    private fun construirSeries(lecturas: List<ThingSpeakApi.Lectura>): Map<Pestana, Serie> {
+        val tramo = VENTANA_MS / NUM_BARRAS
+
+        // Lecturas: reloj de ThingSpeak
+        val inicioServidor = SistemaSeguridad.ahoraServidor() - VENTANA_MS
+        val maxVibracion = DoubleArray(NUM_BARRAS)
+        val lecturasPorTramo = DoubleArray(NUM_BARRAS)
+        var sumaVibracion = 0.0
+        var cantidadVibracion = 0
+        var totalLecturas = 0
+        lecturas.forEach { l ->
+            if (l.creadoMillis < inicioServidor) return@forEach
+            val i = ((l.creadoMillis - inicioServidor) / tramo).toInt().coerceIn(0, NUM_BARRAS - 1)
+            lecturasPorTramo[i] += 1.0
+            totalLecturas++
+            l.vibracionG?.let {
+                maxVibracion[i] = max(maxVibracion[i], it)
+                sumaVibracion += it
+                cantidadVibracion++
+            }
+        }
+
+        // Eventos: reloj del teléfono (así se guardan en el historial)
+        val inicioTelefono = System.currentTimeMillis() - VENTANA_MS
+        val eventosPorTramo = DoubleArray(NUM_BARRAS)
+        var totalEventos = 0
+        HistorialEventos.lista().forEach { e ->
+            if (e.millis < inicioTelefono) return@forEach
+            val i = ((e.millis - inicioTelefono) / tramo).toInt().coerceIn(0, NUM_BARRAS - 1)
+            eventosPorTramo[i] += 1.0
+            totalEventos++
+        }
+
+        val resumenVibracion = if (cantidadVibracion > 0) {
+            SistemaSeguridad.formatoVibracion(sumaVibracion / cantidadVibracion)
+        } else {
+            TXT_SIN_DATOS
+        }
+        return mapOf(
+            Pestana.VIBRACION to Serie(alturas(maxVibracion), resumenVibracion),
+            Pestana.EVENTOS to Serie(
+                alturas(eventosPorTramo),
+                if (totalEventos == 1) "1 evento" else "$totalEventos eventos"
+            ),
+            Pestana.SENAL to Serie(
+                alturas(lecturasPorTramo),
+                if (totalLecturas == 1) "1 lectura" else "$totalLecturas lecturas"
+            )
+        )
+    }
+
+    /** Escala los valores a barras de hasta 100 dp; un tramo sin datos queda como línea base. */
+    private fun alturas(valores: DoubleArray): IntArray {
+        val maximo = valores.maxOrNull() ?: 0.0
+        return IntArray(valores.size) { i ->
+            if (maximo <= 0.0 || valores[i] <= 0.0) {
+                ALTURA_MINIMA
+            } else {
+                max(ALTURA_MINIMA * 2, (valores[i] / maximo * 100).roundToInt())
+            }
+        }
     }
 
     private fun seleccionarPestana(pestana: Pestana, animar: Boolean) {
@@ -383,8 +470,15 @@ class PantallaFunciones : AppCompatActivity() {
     private fun configurarAlarma() {
         renderAlarma()
         btnAlarma.setOnClickListener {
-            if (alarmaActiva) {
-                desactivarAlarma()
+            if (SistemaSeguridad.alarmaActiva) {
+                // La manual se detiene; una alarma automática (intrusión) exige desarmar el sistema
+                val eraManual = SistemaSeguridad.alarmaManual
+                SistemaSeguridad.detenerAlarmaActual()
+                Toast.makeText(
+                    this,
+                    if (eraManual) TXT_ALARMA_DETENIDA else TXT_SISTEMA_DESARMADO,
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
                 confirmarAlarma()
             }
@@ -396,28 +490,20 @@ class PantallaFunciones : AppCompatActivity() {
             .setTitle(R.string.alarma_title)
             .setMessage(R.string.alarma_warning)
             .setNegativeButton(R.string.accion_cancelar, null)
-            .setPositiveButton(R.string.alarma_button) { _, _ -> activarAlarma(avisar = true) }
+            .setPositiveButton(R.string.alarma_button) { _, _ ->
+                SistemaSeguridad.activarAlarmaManual()
+                Toast.makeText(this, TXT_ALARMA_ACTIVADA, Toast.LENGTH_SHORT).show()
+            }
             .show()
     }
 
-    private fun activarAlarma(avisar: Boolean) {
-        alarmaActiva = true
-        iniciarSirena()
-        renderAlarma()
-
-        if (avisar) Toast.makeText(this, TXT_ALARMA_ACTIVADA, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun desactivarAlarma() {
-        alarmaActiva = false
-        detenerSirena()
-        renderAlarma()
-        Toast.makeText(this, TXT_ALARMA_DETENIDA, Toast.LENGTH_SHORT).show()
-    }
-
     private fun renderAlarma() {
-        if (alarmaActiva) {
-            btnAlarma.text = TXT_DETENER_ALARMA
+        if (SistemaSeguridad.alarmaActiva) {
+            btnAlarma.text = if (SistemaSeguridad.alarmaManual) {
+                TXT_DETENER_ALARMA
+            } else {
+                getString(R.string.accion_desarmar)
+            }
             btnAlarma.backgroundTintList = ColorStateList.valueOf(color(R.color.green_dark))
             btnAlarma.setIconResource(R.drawable.ic_power)
         } else {
@@ -425,26 +511,6 @@ class PantallaFunciones : AppCompatActivity() {
             btnAlarma.backgroundTintList = ColorStateList.valueOf(color(R.color.alarm_primary))
             btnAlarma.setIconResource(R.drawable.ic_clock)
         }
-    }
-
-    private fun iniciarSirena() {
-        if (sirena?.isPlaying == true) return
-        val uri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM)
-            ?: RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE)
-        sirena = RingtoneManager.getRingtone(this, uri)?.apply {
-            audioAttributes = AudioAttributes.Builder()
-                .setUsage(AudioAttributes.USAGE_ALARM)
-                .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                .build()
-            // Repetir el sonido solo se puede pedir desde Android 9
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) isLooping = true
-            play()
-        }
-    }
-
-    private fun detenerSirena() {
-        sirena?.stop()
-        sirena = null
     }
 
     // =====================================================================
@@ -457,16 +523,21 @@ class PantallaFunciones : AppCompatActivity() {
         const val KEY_HORA_ARMAR = "hora_armar"
         const val KEY_HORA_DESARMAR = "hora_desarmar"
         const val KEY_DIAS = "dias"
-        const val KEY_ALARMA = "alarma_activa"
         const val TAG_SELECTOR_HORA = "selector_hora"
+
+        const val NUM_BARRAS = 10
+        const val VENTANA_MS = 24L * 60 * 60 * 1000
+        const val ALTURA_MINIMA = 3
 
         const val TXT_HORAS_IGUALES = "La hora de armado y la de desarmado no pueden ser iguales"
         const val TXT_PROGRAMACION_APAGADA = "Programación desactivada"
         const val TXT_SIN_DIAS = "Selecciona al menos un día"
         const val TXT_DIA_ACTIVO = "Activo"
         const val TXT_DIA_INACTIVO = "Inactivo"
+        const val TXT_SIN_DATOS = "—"
         const val TXT_DETENER_ALARMA = "Detener alarma"
         const val TXT_ALARMA_ACTIVADA = "Alarma activada"
         const val TXT_ALARMA_DETENIDA = "Alarma detenida"
+        const val TXT_SISTEMA_DESARMADO = "Sistema desarmado"
     }
 }

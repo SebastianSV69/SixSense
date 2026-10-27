@@ -130,6 +130,7 @@
                                 android:textStyle="bold" />
 
                             <TextView
+                                android:id="@+id/tvFuenteAlerta"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="1dp"
@@ -164,6 +165,7 @@
 
                     <!-- TEXTO PRINCIPAL -->
                     <TextView
+                        android:id="@+id/tvTitularAlerta"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="20dp"
@@ -173,6 +175,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tvCuerpoAlerta"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
