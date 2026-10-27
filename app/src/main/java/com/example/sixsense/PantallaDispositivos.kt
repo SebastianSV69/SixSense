@@ -186,22 +186,7 @@ class PantallaDispositivos : AppCompatActivity() {
     }
 
     private fun configurarBarraNavegacion() {
-        findViewById<View>(R.id.navDispositivos).isSelected = true
-
-        findViewById<View>(R.id.navInicio).setOnClickListener {
-            startActivity(
-                Intent(this, PantallaPrincipal::class.java)
-                    .addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
-            )
-        }
-        findViewById<View>(R.id.navFunciones).setOnClickListener { avisoProximamente() }
-        findViewById<View>(R.id.navAjustes).setOnClickListener { avisoProximamente() }
-        findViewById<View>(R.id.navBloquear).setOnClickListener {
-            startActivity(
-                Intent(this, PantallaBloqueo::class.java)
-                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            )
-        }
+        NavegacionInferior.configurar(this, Destino.DISPOSITIVOS)
     }
 
     private fun configurarSpinner() {

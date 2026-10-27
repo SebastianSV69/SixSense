@@ -99,8 +99,9 @@ class PantallaPrincipal : AppCompatActivity() {
         configurarBarraNavegacion()
 
         findViewById<TextView>(R.id.tvSaludoHora).setText(saludoSegunHora())
-        // PantallaNotificaciones se hará más adelante
-        findViewById<View>(R.id.btnNotificaciones).setOnClickListener { avisoProximamente() }
+        findViewById<View>(R.id.btnNotificaciones).setOnClickListener {
+            NavegacionInferior.abrirNotificaciones(this)
+        }
 
         crearFilasComponentes()
 
@@ -133,23 +134,7 @@ class PantallaPrincipal : AppCompatActivity() {
     }
 
     private fun configurarBarraNavegacion() {
-        findViewById<View>(R.id.navInicio).isSelected = true
-
-        findViewById<View>(R.id.navDispositivos).setOnClickListener {
-            // REORDER_TO_FRONT conserva el estado de las pantallas ya abiertas
-            startActivity(
-                Intent(this, PantallaDispositivos::class.java)
-                    .addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
-            )
-        }
-        findViewById<View>(R.id.navFunciones).setOnClickListener { avisoProximamente() }
-        findViewById<View>(R.id.navAjustes).setOnClickListener { avisoProximamente() }
-        findViewById<View>(R.id.navBloquear).setOnClickListener {
-            startActivity(
-                Intent(this, PantallaBloqueo::class.java)
-                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-            )
-        }
+        NavegacionInferior.configurar(this, Destino.INICIO)
     }
 
     private fun avisoProximamente() {
