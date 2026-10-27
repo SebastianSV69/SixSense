@@ -94,4 +94,15 @@
     <color name="chip_panel_fondo">#33FFFFFF</color>
     <color name="borde_punteado">#B4C9C0</color>
     <color name="fondo_punteado">#F8FBF9</color>
+
+    <!-- Colores nuevos (la versión oscura está en values-night/themes.xml) -->
+    <color name="sobre_oscuro">#FFFFFF</color>
+    <color name="nav_superficie">#F5FFFFFF</color>
+    <color name="alerta_fondo">#FFF5F2</color>
+    <color name="alerta_borde">#F0CFC9</color>
+    <color name="avatar_fondo">#EEF5F1</color>
+    <color name="avatar_borde">#D8E5DF</color>
+    <color name="selector_estado_fondo">#F0F4F2</color>
+    <color name="dia_inactivo_borde">#E0E5E2</color>
+    <color name="btn_armar_deshabilitado">#B8FFFFFF</color>
 </resources>

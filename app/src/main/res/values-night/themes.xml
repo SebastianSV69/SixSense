@@ -1,7 +1,101 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+    <!-- Base application theme (modo oscuro). -->
     <style name="Base.Theme.SixSense" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
         <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
     </style>
+
+    <!-- ===================================================================
+         PALETA DEL MODO OSCURO
+         Aquí se redefinen, con el mismo nombre, los colores de values/colors.xml.
+         Android usa esta versión cuando el modo oscuro está activo.
+         Los colores que no aparecen aquí se mantienen igual que en el modo claro.
+         =================================================================== -->
+
+    <!-- Fondos y superficies -->
+    <color name="brand_background">#0F1613</color>
+    <color name="screen_background">#0F1613</color>
+    <color name="fondo_app">#0F1613</color>
+    <color name="fondo_bloqueo">#0C1210</color>
+    <color name="card_background">#1A2420</color>
+    <color name="blanco">#1A2420</color>
+    <color name="day_inactive_bg">#1A2420</color>
+
+    <!-- Verdes (en oscuro, "green_dark" pasa a ser el verde claro que destaca sobre fondo oscuro) -->
+    <color name="green_dark">#A8D5BE</color>
+    <color name="green_medium">#7FBFA2</color>
+    <color name="green_light_bg">#26332D</color>
+    <color name="verde_primario">#2F8F6D</color>
+    <color name="verde_avatar">#8FD2B1</color>
+    <color name="verde_texto_enlace">#7FCBAA</color>
+    <color name="verde_panel">#1B4638</color>
+    <color name="verde_panel_armado">#17624A</color>
+    <color name="verde_icono">#8FD2B1</color>
+    <color name="verde_icono_fondo">#22332C</color>
+    <color name="verde_icono_hub">#8FD2B1</color>
+    <color name="verde_icono_hub_fondo">#22332C</color>
+    <color name="verde_chip_fondo">#22372F</color>
+    <color name="verde_chip_texto">#9ADBBB</color>
+    <color name="verde_etiqueta_estado">#7FA89A</color>
+    <color name="verde_seleccion">#7FD1AE</color>
+    <color name="verde_lectura">#7FD1AE</color>
+    <color name="verde_texto_boton">#CFF0E1</color>
+
+    <!-- Rojos -->
+    <color name="alarm_primary">#E57373</color>
+    <color name="alarm_light_bg">#3A2326</color>
+    <color name="rojo_texto">#F0A89B</color>
+    <color name="rojo_secundario">#D49A90</color>
+    <color name="rojo_icono_fondo">#3A2623</color>
+    <color name="rojo_seleccion">#E57F6E</color>
+    <color name="chip_desconectado_fondo">#3A2623</color>
+    <color name="chip_desconectado_texto">#F0A89B</color>
+
+    <!-- Textos -->
+    <color name="text_primary">#E6EFEA</color>
+    <color name="text_secondary">#A9B8B1</color>
+    <color name="texto_principal">#E6EFEA</color>
+    <color name="texto_teclas">#DCE8E2</color>
+    <color name="texto_secundario">#9FB0A9</color>
+    <color name="texto_etiqueta">#AFC0B9</color>
+    <color name="texto_hint">#6F7F78</color>
+    <color name="texto_icono_campo">#8FA29B</color>
+    <color name="eyebrow">#8FB0A4</color>
+    <color name="texto_selector_inactivo">#8FA09A</color>
+    <color name="texto_estado_hub">#94A49E</color>
+    <color name="text_on_alarm">#F2121A17</color>
+    <color name="text_on_alarm_secondary">#D9121A17</color>
+
+    <!-- Bordes, divisores e íconos neutros -->
+    <color name="borde">#2A3832</color>
+    <color name="divisor">#26312C</color>
+    <color name="borde_campo">#33443D</color>
+    <color name="borde_punteado">#46605A</color>
+    <color name="fondo_punteado">#141D19</color>
+    <color name="handle_hoja">#3A4A44</color>
+    <color name="scrim_hoja">#99000000</color>
+    <color name="boton_deshabilitado">#34443D</color>
+    <color name="icono_nav_boton">#C9D8D2</color>
+    <color name="nav_inactive">#8FA09A</color>
+    <color name="nav_inactivo">#8FA09A</color>
+    <color name="gris_estado">#6F7B76</color>
+    <color name="gris_icono">#8D9A95</color>
+    <color name="gris_icono_fondo">#26312C</color>
+    <color name="chip_apagado_fondo">#26312C</color>
+    <color name="chip_apagado_texto">#A4B0AB</color>
+
+    <!-- Capas translúcidas sobre la tarjeta roja de alerta -->
+    <color name="overlay_white_20">#40FFFFFF</color>
+    <color name="overlay_white_30">#59FFFFFF</color>
+    <color name="overlay_black_15">#33FFFFFF</color>
+
+    <!-- Colores nuevos (en values/colors.xml están los valores del modo claro) -->
+    <color name="nav_superficie">#F21A2420</color>
+    <color name="alerta_fondo">#2E1F1D</color>
+    <color name="alerta_borde">#5A3A35</color>
+    <color name="avatar_fondo">#22332C</color>
+    <color name="avatar_borde">#33443D</color>
+    <color name="selector_estado_fondo">#26312C</color>
+    <color name="dia_inactivo_borde">#33443D</color>
+    <color name="btn_armar_deshabilitado">#33FFFFFF</color>
 </resources>

@@ -2,7 +2,7 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:state_enabled="false">
         <shape android:shape="rectangle">
-            <solid android:color="#B8FFFFFF" />
+            <solid android:color="@color/btn_armar_deshabilitado" />
             <corners android:radius="13dp" />
         </shape>
     </item>
